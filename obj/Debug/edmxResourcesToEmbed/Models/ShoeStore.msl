@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities">
+    <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="ShoeStoreModel.Store.GetProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ShoeStoreModel.GetProducts_Result">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
+          <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ColorSum" ColumnName="ColorSum" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

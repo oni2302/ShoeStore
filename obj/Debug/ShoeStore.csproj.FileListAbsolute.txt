@@ -83,3 +83,7 @@ C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CoreCompileInputs.cach
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CopyComplete
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.dll
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.pdb
+C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.dll
+C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.SqlServer.dll
+C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.xml
+C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.SqlServer.xml

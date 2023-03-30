@@ -26,6 +26,8 @@ namespace ShoeStore
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/app/*.css"));
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
+                        "~/Scripts/app/*.js"));
         }
     }
 }

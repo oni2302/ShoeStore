@@ -1,7 +1,76 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
 }
+
+<div class="banner-wrap">
+    <div class="banner-img">
+        <img src="~/Images/banner.png" alt="">
+    </div>
+</div>
+<div class="title-wrap">
+    <div class="background-title">S N E A K E R</div>
+    <div class="title">featured</div>
+    <div class="title-detail">products</div>
+</div>
+<div class="product-items-carousel owl-carousel owl-theme">
+    @foreach (var product in ViewBag.NewestProducts)
+    {
+        <a href="" style="text-decoration:none;">
+            <div class="product-item-wrap item">
+                <div class="product-item">
+                    <div class="product-img-wrap">
+                        <img src="~/Images/air.png" alt="">
+                    </div>
+                    <div class="product-name-wrap">
+                        @product.ProductName
+                    </div>
+                    <div class="product-category-wrap">
+                        @product.CategoryName
+                    </div>
+                    <div class="product-color-warp">
+                        @product.ColorSum Color
+                    </div>
+                    <div class="product-price">
+                        @product.ProductPrice đ
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    }
+</div>
+<div class="title-wrap">
+    <div class="background-title">S N E A K E R</div>
+    <div class="title">trending item</div>
+    <div class="title-detail">products</div>
+</div>
+<div class="product-items-carousel owl-carousel owl-theme">
+    @foreach (var product in ViewBag.TrendingProducts)
+    {
+        <a href="" style="text-decoration:none;">
+            <div class="product-item-wrap item">
+                <div class="product-item">
+                    <div class="product-img-wrap">
+                        <img src="~/Images/air.png" alt="">
+                    </div>
+                    <div class="product-name-wrap">
+                        @product.ProductName
+                    </div>
+                    <div class="product-category-wrap">
+                        @product.CategoryName
+                    </div>
+                    <div class="product-color-warp">
+                        @product.ColorSum Color
+                    </div>
+                    <div class="product-price">
+                        @product.ProductPrice đ
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
 
 

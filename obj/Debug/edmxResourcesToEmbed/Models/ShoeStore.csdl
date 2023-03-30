@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShoeStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ShoeStoreEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetProducts" ReturnType="Collection(ShoeStoreModel.GetProducts_Result)">
+      <Parameter Name="qty" Mode="In" Type="Int32" />
+      <Parameter Name="type" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetProducts_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="ProductPrice" Nullable="true" />
+    <Property Type="Binary" Name="ProductPicture" Nullable="true" />
+    <Property Type="Int32" Name="ProductViewer" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Int32" Name="Date" Nullable="true" />
+    <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ColorSum" Nullable="true" />
+  </ComplexType>
+</Schema>
