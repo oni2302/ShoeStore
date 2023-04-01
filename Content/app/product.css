@@ -2,19 +2,20 @@
 ::-webkit-scrollbar {
     width: 0px;
 }/* #region Body */
-.wrapper {
-    display: flex;    
+.list-wrapper {
+    display: flex;
     justify-content: space-between;
     gap: 50px;
+    margin-top:20px;
 }
 
 /* #region Sidebar */
-.side-bar-space {
+.list-side-bar-space {
     width: 250px;
     height: 100vh;
 }
 
-.side-bar-wrap {
+.list-side-bar-wrap {
     position: fixed;
     overflow: hidden;
     overflow-y: scroll;
@@ -23,24 +24,24 @@
     width: inherit;
 }
 
-.side-bar {
+.list-side-bar {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.menu {
+.list-menu {
     width: inherit;
     display: flex;
     flex-direction: column;
     border-bottom: #D9D9D9 1px solid;
 }
-.menu:last-child{
-    border-bottom:unset;
-}
-.menu li {
-    list-style: none;
-}
+    .list-menu:last-child {
+        border-bottom: unset;
+    }
+    .list-menu li {
+        list-style: none;
+    }
 
 .dropdown-btn {
     padding: 6px 0px 6px 16px;
@@ -56,65 +57,67 @@
     width: max-content;
 }
 
-.dropdown-container {
+.list-dropdown-container {
     flex-direction: column;
     display: none;
     width: inherit;
 }
-.dropdown-container.active{
-    display: flex;
-}
-.dropdown-container.size{
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.dropdown-container.size div{
-    border: #000 1px solid;
-    border-radius: 5px;
-    width: fit-content;
-    cursor: pointer;
-    padding: 5px 10px;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
-.dropdown-container.size div.active{
-    background: #000;
-    color: white;
-}
-.dropdown-container.size div:hover{
-    background: #000;
-    color: white;
-}
-.dropdown-container.color{
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.dropdown-container.color div{
-    border: #000 1px solid;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
+    .list-dropdown-container.active {
+        display: flex;
+    }
+    .list-dropdown-container.size {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+        .list-dropdown-container.size div {
+            border: #000 1px solid;
+            border-radius: 5px;
+            width: fit-content;
+            cursor: pointer;
+            padding: 5px 10px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+            .list-dropdown-container.size div.active {
+                background: #000;
+                color: white;
+            }
+            .list-dropdown-container.size div:hover {
+                background: #000;
+                color: white;
+            }
+    .list-dropdown-container.color {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+        .list-dropdown-container.color div {
+            border: #000 1px solid;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
 /* #endregion Sidebar  */
-/* #region Product */
-.body-title{
+/* #region Title*/
+.list-body-title {
     display: flex;
     justify-content: space-between;
 }
-.sort-by-wrap{
+
+.list-sort-by-wrap {
     display: flex;
     flex-direction: column;
     width: 200px;
     align-items: center;
 }
-.dropdown-container.box{
+
+.list-dropdown-container.box {
     border-radius: 10px;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
     position: fixed;
@@ -123,56 +126,80 @@
     width: 100px;
     overflow: hidden;
 }
-.dropdown-container.box div{
-    padding: 10px 20px;
-    cursor: pointer;
+
+    .list-dropdown-container.box div {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        .list-dropdown-container.box div:hover {
+            background: #d6d6d6;
+        }
+/* #endregion Tilte*/
+
+/* #region Product */
+
+.list-products-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
-.dropdown-container.box div:hover{
-    background: #d6d6d6;
-}
-.product-items-wrap{
+
+.list-product-items-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
+    gap: 20px;
 }
-.products-wrap{
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-}
+    .list-product-items-wrap a{
+        text-decoration:none;
+    }
 
+    .list-product-items-wrap .list-product-item {
+        color: #F0EEEE;
+        display: flex;
+        flex-direction: column;
+        flex-basis: 20%;
+        margin: 20px;
+        padding: 20px;
+    }
 
-.product-items{
-    color: #F0EEEE;
-}
-.product-item-wrap{
-    height: fit-content;
-    margin: auto 10px;
-    flex: 1 1 10%;
-}
-.product-name-wrap{
-    color: black;
-    font-weight: 600;
-}
-.product-category-wrap{
-    color: gray !important;
-}
-.product-color-warp{
-    color: gray;
-}
-.product-price{
-    color: black;
-    font-weight: 600;
-}
+        .list-product-items-wrap .list-product-item .list-product-img-wrap {
+            width: 100%;
+        }
 
-.product-item{
-    display: flex;
-    flex-direction: column;
-    color: black;
-    font-family: 'Montserrat', sans-serif; 
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
-}
+            .list-product-items-wrap .list-product-item .list-product-img-wrap img {
+                width: 80%;
+                object-fit: cover;
+                aspect-ratio: 1/1;
+            }
+
+    .list-product-items-wrap .list-product-item .list-product-name-wrap {
+        color: black;
+        font-weight: 600;
+    }
+
+    .list-product-items-wrap .list-product-item .list-product-category-wrap {
+        color: gray !important;
+    }
+
+    .list-product-items-wrap .list-product-item .list-product-color-warp {
+        color: gray;
+    }
+
+    .list-product-items-wrap .list-product-item .list-product-price {
+        color: black;
+        font-weight: 600;
+    }
+
+    .list-product-items-wrap .list-product-item .list-product-item {
+        display: flex;
+        flex-direction: column;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+    }
 
 /* #endregion Body */

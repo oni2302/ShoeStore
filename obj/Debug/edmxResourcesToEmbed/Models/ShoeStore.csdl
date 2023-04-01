@@ -1,21 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ShoeStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ShoeStoreEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetColorOfProduct" ReturnType="Collection(ShoeStoreModel.GetColorOfProduct_Result)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetProductDetail" ReturnType="Collection(ShoeStoreModel.GetProductDetail_Result)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="GetProducts" ReturnType="Collection(ShoeStoreModel.GetProducts_Result)">
       <Parameter Name="qty" Mode="In" Type="Int32" />
       <Parameter Name="type" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetQuantity" ReturnType="Collection(Int32)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+      <Parameter Name="sizeId" Mode="In" Type="Int32" />
+      <Parameter Name="ColorId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
+      <Parameter Name="productId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="GetProducts_Result">
+  <ComplexType Name="GetColorOfProduct_Result">
+    <Property Type="Int32" Name="ColorId" Nullable="false" />
+    <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ColorHexCode" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="GetProductDetail_Result">
     <Property Type="Int32" Name="ProductId" Nullable="false" />
     <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
     <Property Type="Double" Name="ProductPrice" Nullable="true" />
-    <Property Type="Binary" Name="ProductPicture" Nullable="true" />
     <Property Type="Int32" Name="ProductViewer" Nullable="true" />
     <Property Type="Int32" Name="Quantity" Nullable="true" />
     <Property Type="Int32" Name="Date" Nullable="true" />
     <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="GetProducts_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="ProductPrice" Nullable="true" />
+    <Property Type="Int32" Name="ProductViewer" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Int32" Name="Date" Nullable="true" />
+    <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
     <Property Type="Int32" Name="ColorSum" Nullable="true" />
+    <Property Type="Binary" Name="ImageData" Nullable="true" />
+    <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="GetSizeOfProduct_Result">
+    <Property Type="Int32" Name="SizeId" Nullable="false" />
+    <Property Type="Double" Name="SizeValue" Nullable="true" />
   </ComplexType>
 </Schema>

@@ -11,7 +11,7 @@ namespace ShoeStore.Models
 {
     using System;
     
-    public partial class GetProducts_Result
+    public partial class GetProductDetail_Result
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -22,8 +22,5 @@ namespace ShoeStore.Models
         public Nullable<int> ProductCategory { get; set; }
         public string Description { get; set; }
         public string CategoryName { get; set; }
-        public Nullable<int> ColorSum { get; set; }
-        public byte[] ImageData { get; set; }
-        public string ImageExtension { get; set; }
     }
 }

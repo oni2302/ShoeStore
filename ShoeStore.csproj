@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\detail.css" />
     <Content Include="Content\app\home.css" />
     <Content Include="Content\app\masterlayout.css" />
     <Content Include="Content\app\product.css" />
@@ -139,6 +140,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\product.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\air.png" />
     <Content Include="Images\banner.png" />
@@ -190,6 +192,7 @@
     <Content Include="Models\ShoeStore.edmx.diagram">
       <DependentUpon>ShoeStore.edmx</DependentUpon>
     </Content>
+    <Content Include="Images\test_img.webp" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
@@ -202,11 +205,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CommonConstants.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetColorOfProduct_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetProductDetail_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetProducts_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSizeOfProduct_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoeStore.Context.cs">
@@ -232,9 +244,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_MasterLayout.cshtml" />
     <Content Include="Views\web.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.6.4.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.4.min.map" />
+    <Content Include="Views\Products\List.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

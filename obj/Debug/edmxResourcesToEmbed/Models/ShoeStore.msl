@@ -1,19 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities">
+    <FunctionImportMapping FunctionImportName="GetColorOfProduct" FunctionName="ShoeStoreModel.Store.GetColorOfProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ShoeStoreModel.GetColorOfProduct_Result">
+          <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+          <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+          <ScalarProperty Name="ColorHexCode" ColumnName="ColorHexCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProductDetail" FunctionName="ShoeStoreModel.Store.GetProductDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ShoeStoreModel.GetProductDetail_Result">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="ShoeStoreModel.Store.GetProducts">
       <ResultMapping>
         <ComplexTypeMapping TypeName="ShoeStoreModel.GetProducts_Result">
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
-          <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
           <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
           <ScalarProperty Name="ColorSum" ColumnName="ColorSum" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageExtension" ColumnName="ImageExtension" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQuantity" FunctionName="ShoeStoreModel.Store.GetQuantity" />
+    <FunctionImportMapping FunctionImportName="GetSizeOfProduct" FunctionName="ShoeStoreModel.Store.GetSizeOfProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ShoeStoreModel.GetSizeOfProduct_Result">
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="SizeValue" ColumnName="SizeValue" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

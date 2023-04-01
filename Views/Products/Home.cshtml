@@ -16,7 +16,7 @@
 <div class="product-items-carousel owl-carousel owl-theme">
     @foreach (var product in ViewBag.NewestProducts)
     {
-        <a href="" style="text-decoration:none;">
+        <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId })" style="text-decoration:none;">
             <div class="product-item-wrap item">
                 <div class="product-item">
                     <div class="product-img-wrap">
@@ -72,5 +72,7 @@
     }
 
 </div>
+
+
 
 

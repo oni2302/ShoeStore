@@ -1,0 +1,135 @@
+﻿@model ShoeStore.Models.GetProducts_Result
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="list-wrapper">
+    <div class="list-side-bar-space">
+        <div class="list-side-bar-wrap">
+            <div class="list-side-bar">
+                <div class="list-menu category">
+                    <ul>
+                        <li>Running</li>
+                        <li>Lifestyle</li>
+                        <li>Baseketbal</li>
+                        <li>Football</li>
+                        <li>Traning & Gym</li>
+                        <li>Jordan</li>
+                        <li>Skateboarding</li>
+                        <li>Golf</li>
+                        <li>Tennis</li>
+                        <li>Athletics</li>
+                        <li>Walking</li>
+                    </ul>
+                </div>
+                <div class="list-menu price">
+                    <button class="dropdown-btn">
+                        Shop by price
+                    </button>
+                    <div class="list-dropdown-container price">
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                        <p><input type="checkbox" name="" id="">Under 1,000,000đ</p>
+                    </div>
+                </div>
+                <div class="list-menu size">
+                    <button class="dropdown-btn">
+                        Size
+                    </button>
+                    <div class="list-dropdown-container size">
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                        <div class="size-option">35.5</div>
+                    </div>
+                </div>
+                <div class="list-menu color">
+                    <button class="dropdown-btn">
+                        Colours
+                    </button>
+                    <div class="dropdown-container color">
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                        <div class="color-option"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list-products-wrap">
+        <div class="list-body-title">
+
+            <div class="list-title-span">Women's Shoe (<span id="qty" class="">279</span>)</div>
+            <div class="list-sort-by-wrap">
+                <button class="dropdown-btn">
+                    Sort by
+                </button>
+                <div class="list-dropdown-container box">
+                    <div class=""> A - Z</div>
+                    <div class=""> Z - A</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="list-product-items-wrap">
+            @foreach (var item in ViewBag.Product)
+            {
+                <div class="list-product-item">
+                    <a href="@Url.RouteUrl("ChiTietSanPham", new { id = item.ProductId }) ">
+                        <div class="list-product-img-wrap">
+                            <img src="~/Images/air.png" alt="">
+                        </div>
+                        <div class="list-product-name-wrap">
+                            @item.ProductName
+                        </div>
+                        <div class="list-product-category-wrap">
+                            @item.CategoryName
+                        </div>
+                        <div class="list-product-color-warp">
+                            @item.ColorSum Color
+                        </div>
+                        <div class="list-product-price">
+                            @item.ProductPrice đ
+                        </div>
+                    </a>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+</div>
+<script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                dropdownContent.classList.toggle("active");
+            });
+        }
+</script>
+

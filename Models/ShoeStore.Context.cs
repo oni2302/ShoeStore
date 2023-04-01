@@ -28,6 +28,24 @@ namespace ShoeStore.Models
         }
     
     
+        public virtual ObjectResult<GetColorOfProduct_Result> GetColorOfProduct(Nullable<int> productId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetColorOfProduct_Result>("GetColorOfProduct", productIdParameter);
+        }
+    
+        public virtual ObjectResult<GetProductDetail_Result> GetProductDetail(Nullable<int> productId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProductDetail_Result>("GetProductDetail", productIdParameter);
+        }
+    
         public virtual ObjectResult<GetProducts_Result> GetProducts(Nullable<int> qty, string type)
         {
             var qtyParameter = qty.HasValue ?
@@ -39,6 +57,32 @@ namespace ShoeStore.Models
                 new ObjectParameter("type", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", qtyParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetQuantity(Nullable<int> productId, Nullable<int> sizeId, Nullable<int> colorId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(int));
+    
+            var sizeIdParameter = sizeId.HasValue ?
+                new ObjectParameter("sizeId", sizeId) :
+                new ObjectParameter("sizeId", typeof(int));
+    
+            var colorIdParameter = colorId.HasValue ?
+                new ObjectParameter("ColorId", colorId) :
+                new ObjectParameter("ColorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantity", productIdParameter, sizeIdParameter, colorIdParameter);
+        }
+    
+        public virtual ObjectResult<GetSizeOfProduct_Result> GetSizeOfProduct(Nullable<int> productId)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSizeOfProduct_Result>("GetSizeOfProduct", productIdParameter);
         }
     }
 }

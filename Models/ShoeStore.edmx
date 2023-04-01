@@ -5,9 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ShoeStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="GetColorOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetProductDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="qty" Type="int" Mode="In" />
           <Parameter Name="type" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetQuantity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productId" Type="int" Mode="In" />
+          <Parameter Name="sizeId" Type="int" Mode="In" />
+          <Parameter Name="ColorId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="ShoeStoreModelStoreContainer" />
       </Schema></edmx:StorageModels>
@@ -15,22 +29,58 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ShoeStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ShoeStoreEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetColorOfProduct" ReturnType="Collection(ShoeStoreModel.GetColorOfProduct_Result)">
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductDetail" ReturnType="Collection(ShoeStoreModel.GetProductDetail_Result)">
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetProducts" ReturnType="Collection(ShoeStoreModel.GetProducts_Result)">
             <Parameter Name="qty" Mode="In" Type="Int32" />
             <Parameter Name="type" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetQuantity" ReturnType="Collection(Int32)">
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+            <Parameter Name="sizeId" Mode="In" Type="Int32" />
+            <Parameter Name="ColorId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="GetProducts_Result">
+        <ComplexType Name="GetColorOfProduct_Result">
+          <Property Type="Int32" Name="ColorId" Nullable="false" />
+          <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ColorHexCode" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetProductDetail_Result">
           <Property Type="Int32" Name="ProductId" Nullable="false" />
           <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
           <Property Type="Double" Name="ProductPrice" Nullable="true" />
-          <Property Type="Binary" Name="ProductPicture" Nullable="true" />
           <Property Type="Int32" Name="ProductViewer" Nullable="true" />
           <Property Type="Int32" Name="Quantity" Nullable="true" />
           <Property Type="Int32" Name="Date" Nullable="true" />
           <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetProducts_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+          <Property Type="Double" Name="ProductPrice" Nullable="true" />
+          <Property Type="Int32" Name="ProductViewer" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Date" Nullable="true" />
+          <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="ColorSum" Nullable="true" />
+          <Property Type="Binary" Name="ImageData" Nullable="true" />
+          <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetSizeOfProduct_Result">
+          <Property Type="Int32" Name="SizeId" Nullable="false" />
+          <Property Type="Double" Name="SizeValue" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -38,19 +88,54 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities" >
+          <FunctionImportMapping FunctionImportName="GetColorOfProduct" FunctionName="ShoeStoreModel.Store.GetColorOfProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetColorOfProduct_Result">
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="ColorHexCode" ColumnName="ColorHexCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductDetail" FunctionName="ShoeStoreModel.Store.GetProductDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetProductDetail_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="ShoeStoreModel.Store.GetProducts">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ShoeStoreModel.GetProducts_Result">
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
-                <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
                 <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="ColorSum" ColumnName="ColorSum" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="ImageExtension" ColumnName="ImageExtension" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetQuantity" FunctionName="ShoeStoreModel.Store.GetQuantity" />
+          <FunctionImportMapping FunctionImportName="GetSizeOfProduct" FunctionName="ShoeStoreModel.Store.GetSizeOfProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetSizeOfProduct_Result">
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="SizeValue" ColumnName="SizeValue" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

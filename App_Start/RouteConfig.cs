@@ -15,8 +15,23 @@ namespace ShoeStore
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { action = "Index", controller="Home" , id = UrlParameter.Optional }
+                url: "",
+                defaults: new { action = "Home", controller="Products" , id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "TrangChu",
+                url: "trangchu/",
+                defaults: new { action = "Home", controller = "Products", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "SanPham",
+                url: "sanpham/loai/{id}",
+                defaults: new { action = "List", controller = "Products", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ChiTietSanPham",
+                url: "sanpham/{id}/chitiet",
+                defaults: new { action = "Details", controller = "Products", id = UrlParameter.Optional }
             );
         }
     }
