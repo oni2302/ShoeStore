@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Manager";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container" style="background-color: #F2F2F2; padding: 50px;">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h3 class="fw-bold">Quản Lý Sản Phẩm</h3>
+            @*<form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>*@
+        </div>
+        <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+
+            <p>
+                @Html.ActionLink("Thêm sản phẩm ", "ThemSanPham","Product", new {  @class = "btn btn-outline-success", @style = "border-radius: 1rem;  width: 150px;"  })
+
+            </p>
+            <div class="">
+
+                <table class="table table-hover">
+
+                    <tr>
+                        <th>
+                            <label>ProductName</label>
+                        </th>
+                        <th>
+                            <label>ProductPrice</label>
+                        </th>
+                        <th>
+                            <label>Category</label>
+                        </th>
+                        <th>
+                            <label>ProductViewer</label>
+                        </th>
+                        <th>
+                            <label>Quantity</label>
+                        </th>
+                        <th>
+                            <label>Date</label>
+                        </th>
+                        <th>
+                            <label>Description</label>
+                        </th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.Products)
+                    {
+                        <tr>
+                            <td>
+                                @item.ProductName
+                            </td>
+                            <td>
+                                @item.ProductPrice
+                            </td>
+                            <td>
+                                @item.CategoryName
+                            </td>
+                            <td>
+                                @item.ProductViewer
+                            </td>
+                            <td>
+                                @item.Quantity
+                            </td>
+                            <td>
+                                @item.Date
+                            </td>
+                            <td>
+                                @item.Description
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Sửa", "SuaSanPham", new { id = item.ProductId }, new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                                
+                            </td>
+                            <td>
+                                
+                                @Html.ActionLink("Thêm", "SuaSanPham", new { id = item.ProductId }, new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                                
+                            </td>
+                            <td>
+                                
+                                @Html.ActionLink("Xóa", "XoaSanPham", new { id = item.ProductId }, new { @class = "btn btn-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+

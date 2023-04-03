@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "XoaSanPham";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+        <div class="form-horizontal w-50 mx-auto" style="background-color: white; padding: 30px; border-radius: 1rem; width: 50%;">
+            <h4 style="text-align:center;">Xác nhận xóa sản phẩm?</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <label for="" class="form-label my-3">ProductName</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.ProductName
+                </dd>
+
+                <dt>
+                    <label for="" class="form-label my-3">ProductPrice</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.ProductPrice
+                </dd>
+
+
+                <dt>
+                    <label for="" class="form-label my-3">ProductViewer</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.ProductViewer
+                </dd>
+
+                <dt>
+                    <label for="" class="form-label my-3">Quantity</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.Quantity
+                </dd>
+
+                <dt>
+                    <label for="" class="form-label my-3">Date</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.Date
+                </dd>
+
+                <dt>
+                    <label for="" class="form-label my-3">Description</label>
+                </dt>
+
+                <dd>
+                    @ViewBag.xoa.Description
+                </dd>
+            </dl>
+
+            
+
+            <div class="form-actions no-color" style="display:flex; justify-content: center;">
+
+                @Html.ActionLink("Hủy", "manager", "Product", new { @class = "btn btn-outline-success m-1", @style = "border-radius: 1.5rem;  width: 100px;" })
+                <button class="btn btn-success m-1" name="ProductID" style="border-radius: 1.5rem; width: 100px; margin-left: 15px;" type="submit" value="@ViewBag.xoa.ProductId">Xóa</button>
+
+            </div>
+            
+        </div>
+    </div>
+}
+

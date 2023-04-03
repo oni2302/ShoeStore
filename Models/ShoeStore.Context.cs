@@ -28,6 +28,36 @@ namespace ShoeStore.Models
         }
     
     
+        public virtual int addSizeColor(Nullable<int> productId, Nullable<int> sizeId, Nullable<int> colorId, Nullable<int> qty, ObjectParameter message)
+        {
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("productId", productId) :
+                new ObjectParameter("productId", typeof(int));
+    
+            var sizeIdParameter = sizeId.HasValue ?
+                new ObjectParameter("sizeId", sizeId) :
+                new ObjectParameter("sizeId", typeof(int));
+    
+            var colorIdParameter = colorId.HasValue ?
+                new ObjectParameter("colorId", colorId) :
+                new ObjectParameter("colorId", typeof(int));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("qty", qty) :
+                new ObjectParameter("qty", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addSizeColor", productIdParameter, sizeIdParameter, colorIdParameter, qtyParameter, message);
+        }
+    
+        public virtual int DeleteProduct(Nullable<int> productID)
+        {
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteProduct", productIDParameter);
+        }
+    
         public virtual ObjectResult<GetColorOfProduct_Result> GetColorOfProduct(Nullable<int> productId)
         {
             var productIdParameter = productId.HasValue ?
@@ -35,6 +65,11 @@ namespace ShoeStore.Models
                 new ObjectParameter("productId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetColorOfProduct_Result>("GetColorOfProduct", productIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomer_Result> GetCustomer()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomer_Result>("GetCustomer");
         }
     
         public virtual ObjectResult<GetProductDetail_Result> GetProductDetail(Nullable<int> productId)
@@ -83,6 +118,103 @@ namespace ShoeStore.Models
                 new ObjectParameter("productId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSizeOfProduct_Result>("GetSizeOfProduct", productIdParameter);
+        }
+    
+        public virtual int InsertProduct(string productName, Nullable<double> productPrice, Nullable<int> productCategory, string description)
+        {
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            var productPriceParameter = productPrice.HasValue ?
+                new ObjectParameter("ProductPrice", productPrice) :
+                new ObjectParameter("ProductPrice", typeof(double));
+    
+            var productCategoryParameter = productCategory.HasValue ?
+                new ObjectParameter("ProductCategory", productCategory) :
+                new ObjectParameter("ProductCategory", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertProduct", productNameParameter, productPriceParameter, productCategoryParameter, descriptionParameter);
+        }
+    
+        public virtual int RegValid(string username, string pass, string email, string sdt, string diachi, string tenkh)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("pass", pass) :
+                new ObjectParameter("pass", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var sdtParameter = sdt != null ?
+                new ObjectParameter("sdt", sdt) :
+                new ObjectParameter("sdt", typeof(string));
+    
+            var diachiParameter = diachi != null ?
+                new ObjectParameter("diachi", diachi) :
+                new ObjectParameter("diachi", typeof(string));
+    
+            var tenkhParameter = tenkh != null ?
+                new ObjectParameter("tenkh", tenkh) :
+                new ObjectParameter("tenkh", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegValid", usernameParameter, passParameter, emailParameter, sdtParameter, diachiParameter, tenkhParameter);
+        }
+    
+        public virtual ObjectResult<SearchProduct_Result> SearchProduct(string productName)
+        {
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchProduct_Result>("SearchProduct", productNameParameter);
+        }
+    
+        public virtual int UpdateProduct(Nullable<int> productID, string productName, Nullable<double> productPrice, Nullable<int> productCategory, string description)
+        {
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(int));
+    
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            var productPriceParameter = productPrice.HasValue ?
+                new ObjectParameter("ProductPrice", productPrice) :
+                new ObjectParameter("ProductPrice", typeof(double));
+    
+            var productCategoryParameter = productCategory.HasValue ?
+                new ObjectParameter("ProductCategory", productCategory) :
+                new ObjectParameter("ProductCategory", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateProduct", productIDParameter, productNameParameter, productPriceParameter, productCategoryParameter, descriptionParameter);
+        }
+    
+        public virtual ObjectResult<UserReg_Result> UserReg(string username, string pass)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("pass", pass) :
+                new ObjectParameter("pass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserReg_Result>("UserReg", usernameParameter, passParameter);
         }
     }
 }

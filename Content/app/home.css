@@ -6,10 +6,10 @@
 .main-body .banner-wrap{
     width: 100%;
 }
-.main-body .banner-wrap .banner-img{
+.main-body .banner-wrap .banner-img {
     width: 100%;
     object-fit: cover;
-}
+ }
 .main-body .banner-wrap .banner-img img{
     width: 100%;
 }
