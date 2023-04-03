@@ -194,7 +194,7 @@
     <Content Include="Content\app\detail.css" />
     <Content Include="Content\app\home.css" />
     <Content Include="Content\app\layout.css" />
-    <Content Include="Content\app\masterlayout.css" />
+    <Content Include="Content\app\masterLayout.css" />
     <Content Include="Content\app\product.css" />
     <Content Include="Content\app\reset.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -615,11 +615,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Common\CommonConstants.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\QLKHController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Controllers\SignupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Entities\Carts.cs" />
     <Compile Include="Entities\CartProduct.cs" />
     <Compile Include="Global.asax.cs">
@@ -675,13 +674,12 @@
     <Content Include="Views\Products\List.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Home.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\ThanhToan.cshtml" />
-    <Content Include="Views\Login\View.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Signup\Signup.cshtml" />
-    <Content Include="Views\QLKH\CustomerList.cshtml" />
-    <Content Include="Views\QLKH\AddCustomer.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\ThanhToan.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\Signup.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKH\CustomerList.cshtml" />
+    <Content Include="Areas\Admin\Views\QLKH\AddCustomer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -695,7 +693,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Pro\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -14,16 +14,6 @@ namespace ShoeStore
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            /* Ngoại lệ*/
-            routes.MapRoute(
-              name: "Default",
-              url: "{controller}/{action}/{id}",
-              defaults: new
-              {
-                  action = "Home",
-                  controller = "Products",
-                  id = UrlParameter.Optional
-              });
             routes.MapRoute(
               name: "SanPham",
               url: "sanpham/loai/{id}",
@@ -46,12 +36,11 @@ namespace ShoeStore
             );
             routes.MapRoute(
               name: "ThemGioHang",
-              url: "themgiohang/{id}",
+              url: "themgiohang",
               defaults: new
               {
                   action = "AddToCart",
-                  controller = "ShoppingCart",
-                  id = UrlParameter.Optional
+                  controller = "Cart"
               }
             );
             routes.MapRoute(
@@ -60,7 +49,7 @@ namespace ShoeStore
               defaults: new
               {
                   action = "Index",
-                  controller = "ShoppingCart",
+                  controller = "Cart",
                   id = UrlParameter.Optional
               }
             );
@@ -70,7 +59,7 @@ namespace ShoeStore
               defaults: new
               {
                   action = "ThanhToan",
-                  controller = "ShoppingCart",
+                  controller = "Cart",
                   id = UrlParameter.Optional
               }
             );
@@ -147,17 +136,17 @@ namespace ShoeStore
                   controller = "Product"
               }
             );
+
+            /* Ngoại lệ*/
             routes.MapRoute(
-              name: "Admin",
-              url: "Admin",
+              name: "Default",
+              url: "{controller}/{action}/{id}",
               defaults: new
               {
-                  action = "Index",
-                  controller = "Home"
-              }
-            );
-
-            
+                  action = "Home",
+                  controller = "Products",
+                  id = UrlParameter.Optional
+              });
         }
     }
 }

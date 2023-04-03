@@ -1,4 +1,4 @@
-﻿    
+﻿
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
@@ -43,7 +43,7 @@
                     @foreach (var size in ViewBag.Size)
                     {
                         <option value="@size.SizeId">@size.SizeValue</option>
-                    }                   
+                    }
                 </select>
             </div>
             <div class="detail-info-color">
@@ -56,7 +56,7 @@
                 </select>
             </div>
             <div class="detail-info-action">
-                <button><a style="color:inherit" class="text-decoration-none" href="@Url.RouteUrl("ThemGioHang",ViewBag.ProductDetail.ProductId)">Add to cart</a></button>
+                <button id="themgiohang"><a style="color:inherit" class="text-decoration-none" @*href="@Url.RouteUrl("ThemGioHang",ViewBag.ProductDetail.ProductId)"*@>Add to cart</a></button>
                 <button>Favorite</button>
             </div>
             <div class="detail-info-terms">Free Delivery and Returns</div>
@@ -66,4 +66,16 @@
     <!-- Phần dưới-->
     <div class="detail-sub"></div>
 </div>
+<script>
+    $("#themgiohang").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "@Url.RouteUrl("ThemGioHang")",
+            data: { id: "@ViewBag.ProductDetail.ProductId" },
+            success: function (msg) {
+                alert(msg);
+            }
+        });
+    });
+</script>
 
