@@ -30,7 +30,6 @@ C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.IO.Compression.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.IO.Compression.ZipFile.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Net.Http.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Net.Sockets.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
@@ -50,21 +49,6 @@ C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\vbc.exe.config
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\vbc.rsp
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\VBCSCompiler.exe
 C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\NNP\Desktop\ShoeStore\bin\Antlr3.Runtime.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\Newtonsoft.Json.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Net.Http.Formatting.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Helpers.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Http.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Http.WebHost.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Mvc.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Optimization.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.Razor.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.WebPages.Deployment.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.WebPages.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\System.Web.WebPages.Razor.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\WebGrease.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\Antlr3.Runtime.pdb
 C:\Users\NNP\Desktop\ShoeStore\bin\Newtonsoft.Json.xml
 C:\Users\NNP\Desktop\ShoeStore\bin\System.Net.Http.Formatting.xml
@@ -83,8 +67,6 @@ C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CoreCompileInputs.cach
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CopyComplete
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.dll
 C:\Users\NNP\Desktop\ShoeStore\obj\Debug\ShoeStore.pdb
-C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.dll
-C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.SqlServer.dll
 C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.xml
 C:\Users\NNP\Desktop\ShoeStore\bin\EntityFramework.SqlServer.xml
 D:\2022-2023\LTW_NC\Doan\ShoeStore\bin\ShoeStore.dll.config
@@ -571,3 +553,7 @@ C:\Users\oni\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CoreCompileInputs.cach
 C:\Users\oni\Desktop\ShoeStore\obj\Debug\ShoeStore.csproj.CopyComplete
 C:\Users\oni\Desktop\ShoeStore\obj\Debug\ShoeStore.dll
 C:\Users\oni\Desktop\ShoeStore\obj\Debug\ShoeStore.pdb
+C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Buffers.dll
+C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Memory.dll
+C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\NNP\Desktop\ShoeStore\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll

@@ -16,11 +16,16 @@
 <div class="product-items-carousel owl-carousel owl-theme">
     @foreach (var product in ViewBag.NewestProducts)
     {
+        string image = "";
+        if (product.ImageData !=null)
+        {
+            image = Convert.ToBase64String(product.ImageData);
+        }
         <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId })" style="text-decoration:none;">
             <div class="product-item-wrap item">
                 <div class="product-item">
                     <div class="product-img-wrap">
-                        <img src="~/Images/air.png" alt="">
+                        <img src="data:image/png;base64,@image" alt="">
                     </div>
                     <div class="product-name-wrap">
                         @product.ProductName
@@ -48,11 +53,16 @@
 <div class="product-items-carousel owl-carousel owl-theme">
     @foreach (var product in ViewBag.TrendingProducts)
     {
-        <a href="" style="text-decoration:none;">
+        string image = "";
+        if (product.ImageData != null)
+        {
+            image = Convert.ToBase64String(product.ImageData);
+        }
+        <a href="@Url.RouteUrl("ChiTietSanPham", new { id = product.ProductId })" style="text-decoration:none;">
             <div class="product-item-wrap item">
                 <div class="product-item">
                     <div class="product-img-wrap">
-                        <img src="~/Images/air.png" alt="">
+                        <img src="data:image/png;base64,@image" alt="">
                     </div>
                     <div class="product-name-wrap">
                         @product.ProductName
