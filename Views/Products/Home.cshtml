@@ -17,7 +17,7 @@
     @foreach (var product in ViewBag.NewestProducts)
     {
         string image = "";
-        if (product.ImageData !=null)
+        if (product.ImageData != null)
         {
             image = Convert.ToBase64String(product.ImageData);
         }
@@ -82,6 +82,136 @@
     }
 
 </div>
+
+@section Styles
+{
+    <style type="text/css">
+
+        /*#region Main body  */
+        .main-body {
+            width: 100%;
+        }
+
+            .main-body .banner-wrap {
+                width: 100%;
+            }
+
+                .main-body .banner-wrap .banner-img {
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+                    .main-body .banner-wrap .banner-img img {
+                        width: 100%;
+                    }
+
+            .main-body .title-wrap {
+                font-family: 'Montserrat', sans-serif;
+                width: 100%;
+                height: max-content;
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+                height: 160px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+                .main-body .title-wrap div {
+                    width: 100%;
+                    position: relative;
+                    z-index: 1;
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .main-body .title-wrap .background-title {
+                    font-weight: 900;
+                    z-index: 0;
+                    font-size: 120px;
+                    color: #F0EEEE;
+                    position: absolute;
+                }
+
+                .main-body .title-wrap .title {
+                    font-size: 40px;
+                    letter-spacing: 10px;
+                }
+
+                .main-body .title-wrap .title-detail {
+                    font-size: 22px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                }
+        /*#endregion Main body  */
+
+        /*#region Carousel  */
+        .product-items-carousel {
+            color: #F0EEEE;
+        }
+
+        .product-item-wrap {
+            height: fit-content;
+            margin: auto 10px;
+        }
+
+        .product-name-wrap {
+            color: black;
+            font-weight: 600;
+        }
+
+        .product-category-wrap {
+            color: gray !important;
+        }
+
+        .product-color-warp {
+            color: gray;
+        }
+
+        .product-price {
+            color: black;
+            font-weight: 600;
+        }
+
+        .owl-nav {
+            position: absolute;
+            top: 40%;
+            margin: auto 0;
+            width: 100%;
+            color: black;
+            font-size: 30px;
+        }
+
+            .owl-nav .owl-next {
+                float: right;
+            }
+
+            .owl-nav .owl-prev {
+                float: left;
+            }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+
+            .product-item .product-img-wrap {
+            }
+
+                .product-item .product-img-wrap img {
+                    object-fit: cover;
+                    aspect-ratio: 1/1;
+                }
+        /*#endregion Carousel  */
+
+    </style>
+}
 
 
 
