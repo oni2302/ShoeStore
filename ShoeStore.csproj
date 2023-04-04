@@ -421,7 +421,6 @@
     <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.xml" />
     <Content Include="packages\WebGrease.1.5.2\lib\WebGrease.dll" />
     <Content Include="packages\WebGrease.1.5.2\tools\WG.exe" />
-    <Content Include="Scripts\app\home.js" />
     <Content Include="Scripts\app\_MasterLayout.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

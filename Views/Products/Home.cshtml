@@ -83,6 +83,40 @@
 
 </div>
 
+@section Scripts{
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3500,
+            autoplayHoverPause: true,
+            center: true,
+            navText: ["<i class='bx bxs-chevron-left'></i>", "<i class='bx bxs-chevron-right'></i>"],
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                },
+                2000: {
+                    items: 5
+                },
+                3000: {
+                    items: 6
+                }
+
+            }
+        })
+    </script>
+    
+    }
+
 @section Styles
 {
     <style type="text/css">
@@ -128,8 +162,8 @@
 
                 .main-body .title-wrap .background-title {
                     font-weight: 900;
-                    z-index: 0;
                     font-size: 120px;
+                    z-index: 0;
                     color: #F0EEEE;
                     position: absolute;
                 }
@@ -159,19 +193,23 @@
         .product-name-wrap {
             color: black;
             font-weight: 600;
+            font-size:1.2em;
         }
 
         .product-category-wrap {
             color: gray !important;
+            font-size: 1.2em;
         }
 
         .product-color-warp {
             color: gray;
+            font-size: 1.2em;
         }
 
         .product-price {
             color: black;
             font-weight: 600;
+            font-size: 1.2em;
         }
 
         .owl-nav {
@@ -210,6 +248,26 @@
                 }
         /*#endregion Carousel  */
 
+        @@media only screen and (max-width: 1300px) {
+            .main-body .title-wrap .background-title {
+                font-weight: 900;
+                font-size: 12vw;
+                z-index: 0;
+                color: #F0EEEE;
+                position: absolute;
+            }
+
+            .main-body .title-wrap .title {
+                font-size: 4vw;
+                letter-spacing: 10px;
+            }
+
+            .main-body .title-wrap .title-detail {
+                font-size: 2.2vw;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+        }
     </style>
 }
 
