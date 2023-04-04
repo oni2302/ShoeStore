@@ -15,12 +15,71 @@
     align-items: center;
     height: 100%;
     gap: 30px;
+    transition: .3s;
 }
+
+    .navbar-wrap .ham-menu {
+        position: fixed;
+        width: 3em;
+        height: 3em;
+        background-color: black;
+        z-index: 10;
+        top: 0.3em;
+        right: 0.3em;
+        border-radius: 10px;
+        color: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        border: 0.5px solid black;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .navbar-wrap .ham-menu i {
+            font-size: 1.6em;
+        }
+
+        .navbar-wrap .ham-menu:hover {
+            color: black;
+            background: white;
+        }
+
+    .navbar-wrap .toggle-btn {
+        position: absolute;
+        width: 2em;
+        height: 2em;
+        background-color: black;
+        z-index: 10;
+        top: 50%;
+        border-radius: 50%;
+        color: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        left: -1em;
+        cursor:pointer;
+    }
+
+        .navbar-wrap .toggle-btn.toggled {
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            background-color: black;
+            z-index: 10;
+            top: 50%;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: -1em;
+        }
 
 .logo-wrap {
     margin: 0 20px;
     font-family: 'Batman';
-    font-size: 30px;
+    font-size: 2em;
     text-shadow: 2px 2px 2px rgb(201, 201, 201);
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
@@ -36,6 +95,7 @@
     align-items: center;
     gap: 40px;
     font-size: 0.9em;
+    transition: .3s;
 }
 
     .nav-menu-wrap a {
@@ -76,7 +136,7 @@
     height: fit-content;
     border: 1px solid black;
     border-radius: 50px;
-    padding: 8px 16px;
+    padding: 0.5em 1em;
     font-size: 0.9em;
     font-weight: 600;
     color: black;
@@ -177,4 +237,66 @@
     border-top: 1px solid white;
 }
 /* #endregion Footer */
+/* #region Responsive*/
+@media only screen and (max-width: 1000px) {
+    body {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    body {
+        font-size: 15px;
+    }
+
+    .app-header {
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-wrap {
+        flex-direction: column-reverse;
+        background: white;
+        z-index: 9;
+        position: fixed;
+        right: -20em;
+        height: fit-content;
+        padding: 1em;
+        border-radius: 20px;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+        top: 60px;
+    }
+
+        .navbar-wrap.toggled {
+            right: 0;
+        }
+
+        .navbar-wrap .ham-menu {
+            display: flex;
+        }
+
+            .navbar-wrap .ham-menu.toggled {
+                right: -10rem;
+            }
+
+        .navbar-wrap .toggle-btn {
+            display: flex;
+        }
+
+    .nav-menu-wrap {
+        flex-direction: column;
+    }
+
+    .tool-nav-menu-wrap {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .account-wrap {
+        margin: unset;
+    }
+}
+/* #endregion Responsive*/
 

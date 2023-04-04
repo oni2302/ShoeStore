@@ -25,3 +25,7 @@ img {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+}
