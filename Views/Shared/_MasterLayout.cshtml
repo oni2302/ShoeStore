@@ -1,7 +1,8 @@
-﻿@{string login = "";
+﻿@{string login = ""; ShoeStore.Models.getUserSession_Result user =null;
     if (Session[ShoeStore.Common.CommonConstants.USER_SESSION] != null)
     {
         login = "logged-in";
+        user = Session[ShoeStore.Common.CommonConstants.USER_SESSION] as ShoeStore.Models.getUserSession_Result;
     }
 }
 <!DOCTYPE html>
@@ -34,12 +35,12 @@
             </div>
             <div class="logo-wrap">GHK2P</div>
             <div class="nav-menu-wrap">
-                <div class="nav-menu-item"><a href="">home</a></div>
-                <div class="nav-menu-item"><a href="">collections</a></div>
-                <div class="nav-menu-item"><a href="">men</a></div>
-                <div class="nav-menu-item"><a href="">women</a></div>
-                <div class="nav-menu-item"><a href="">kids</a></div>
-                <div class="nav-menu-item"><a href="">sale</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("trangchu")" >home</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("danhsachsanpham")" >collections</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("category",new { category = "Men's Shoe" })" >men</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("category",new { category = "Women's Shoe" })" >women</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("category",new { category = "Kid's Shoe" })" >kids</a></div>
+                <div class="nav-menu-item"><a href="@Url.RouteUrl("category",new { category = "Sales" })" >sale</a></div>
             </div>
             <div class="tool-nav-menu-wrap">
                 <div class="tool-nav-menu">
@@ -82,12 +83,20 @@
                     </div>
                     <div class="user-profile">
                         <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 70 70" fill="none">
-                                <path d="M35.0508 2.49146C16.8534 2.49146 2.10156 17.2433 2.10156 35.4407C2.10156 53.6379 16.8534 68.3899 35.0508 68.3899C53.248 68.3899 68 53.6379 68 35.4407C68 17.2433 53.248 2.49146 35.0508 2.49146Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" fill="#E5E5E5" />
-                                <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M35.0513 35.4412C40.5106 35.4412 44.936 31.0158 44.936 25.5565C44.936 20.0973 40.5106 15.6717 35.0513 15.6717C29.5919 15.6717 25.1665 20.0973 25.1665 25.5565C25.1665 31.0158 29.5919 35.4412 35.0513 35.4412Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                            @if (user !=null && user.CustomerImage!=null)
+                                {
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(user.CustomerImage)" />
+                                }
+                            else
+                                {
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 70 70" fill="none">
+                                    <path d="M35.0508 2.49146C16.8534 2.49146 2.10156 17.2433 2.10156 35.4407C2.10156 53.6379 16.8534 68.3899 35.0508 68.3899C53.248 68.3899 68 53.6379 68 35.4407C68 17.2433 53.248 2.49146 35.0508 2.49146Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" fill="#E5E5E5" />
+                                    <path d="M9.58447 56.349C9.58447 56.349 16.9289 46.9727 35.0509 46.9727C53.173 46.9727 60.5177 56.349 60.5177 56.349" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M35.0513 35.4412C40.5106 35.4412 44.936 31.0158 44.936 25.5565C44.936 20.0973 40.5106 15.6717 35.0513 15.6717C29.5919 15.6717 25.1665 20.0973 25.1665 25.5565C25.1665 31.0158 29.5919 35.4412 35.0513 35.4412Z" fill="#E5E5E5" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                }
+                            
                         </a>
                     </div>
                 </div>

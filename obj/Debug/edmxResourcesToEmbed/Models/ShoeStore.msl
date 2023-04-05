@@ -2,6 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities">
     <FunctionImportMapping FunctionImportName="addSizeColor" FunctionName="ShoeStoreModel.Store.addSizeColor" />
+    <FunctionImportMapping FunctionImportName="AuthenticateRegister" FunctionName="ShoeStoreModel.Store.AuthenticateRegister" />
     <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="ShoeStoreModel.Store.DeleteProduct" />
     <FunctionImportMapping FunctionImportName="GetColorOfProduct" FunctionName="ShoeStoreModel.Store.GetColorOfProduct">
       <ResultMapping>
@@ -12,19 +13,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetCustomer" FunctionName="ShoeStoreModel.Store.GetCustomer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ShoeStoreModel.GetCustomer_Result">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="tenkh" ColumnName="tenkh" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="sdt" ColumnName="sdt" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="pass" ColumnName="pass" />
-          <ScalarProperty Name="diachi" ColumnName="diachi" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCustomer" FunctionName="ShoeStoreModel.Store.GetCustomer" />
     <FunctionImportMapping FunctionImportName="GetProductDetail" FunctionName="ShoeStoreModel.Store.GetProductDetail">
       <ResultMapping>
         <ComplexTypeMapping TypeName="ShoeStoreModel.GetProductDetail_Result">
@@ -68,7 +57,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="InsertProduct" FunctionName="ShoeStoreModel.Store.InsertProduct" />
-    <FunctionImportMapping FunctionImportName="RegValid" FunctionName="ShoeStoreModel.Store.RegValid" />
     <FunctionImportMapping FunctionImportName="SearchProduct" FunctionName="ShoeStoreModel.Store.SearchProduct">
       <ResultMapping>
         <ComplexTypeMapping TypeName="ShoeStoreModel.SearchProduct_Result">
@@ -84,11 +72,17 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="ShoeStoreModel.Store.UpdateProduct" />
-    <FunctionImportMapping FunctionImportName="UserReg" FunctionName="ShoeStoreModel.Store.UserReg">
+    <FunctionImportMapping FunctionImportName="UploadImageToProduct" FunctionName="ShoeStoreModel.Store.UploadImageToProduct" />
+    <FunctionImportMapping FunctionImportName="AuthenticateLogin" FunctionName="ShoeStoreModel.Store.AuthenticateLogin" />
+    <FunctionImportMapping FunctionImportName="getUserSession" FunctionName="ShoeStoreModel.Store.getUserSession">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="ShoeStoreModel.UserReg_Result">
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="pass" ColumnName="pass" />
+        <ComplexTypeMapping TypeName="ShoeStoreModel.getUserSession_Result">
+          <ScalarProperty Name="CustomerUsername" ColumnName="CustomerUsername" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="CustomerPNum" ColumnName="CustomerPNum" />
+          <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+          <ScalarProperty Name="CustomerImage" ColumnName="CustomerImage" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

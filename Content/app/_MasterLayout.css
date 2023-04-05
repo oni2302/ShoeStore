@@ -149,18 +149,34 @@
     }
 
     .login-btn a {
-        color: inherit;
+        color: black;
         text-decoration: none;
         font-family: 'Montserrat', sans-serif;
     }
+    .login-btn:hover a {
+        color:white; 
+    }
+        .account-wrap.logged-in .login-btn {
+            display: none;
+        }
 
-.account-wrap.logged-in .login-btn {
-    display: none;
-}
-
-.account-wrap.logged-in .user-profile {
-    display: unset;
-}
+        .account-wrap.logged-in .user-profile {
+            display: unset;
+        }
+        .account-wrap.logged-in .user-profile a {
+            width:fit-content;
+            height:fit-content;
+            display:block;
+            border-radius:50%;
+            border: .5px solid black;
+        }
+            .account-wrap.logged-in .user-profile a img {
+                width: 40px;
+                height: 40px;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                border-radius: 50%;
+            }
 
 .user-profile {
     display: none;
@@ -190,6 +206,7 @@
     font-family: 'Montserrat', sans-serif;
     padding: 50px;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
     .footer-banner-wrap .footer-banner-main-wrap {
@@ -199,6 +216,7 @@
 
     .footer-banner-wrap .footer-main-about {
         display: flex;
+        flex-wrap:wrap;
         flex-direction: column;
     }
 
@@ -213,11 +231,13 @@
     .footer-banner-wrap .footer-banner-main-wrap .footer-main-contact {
         display: flex;
         gap: 80px;
+        flex-wrap: wrap;
     }
 
         .footer-banner-wrap .footer-banner-main-wrap .footer-main-contact .contact-item {
             display: flex;
             flex-direction: column;
+            flex-wrap: wrap;
             gap: 10px;
         }
 
@@ -297,6 +317,12 @@
     .account-wrap {
         margin: unset;
     }
+}
+
+.account-wrap.logged-in .user-profile a img {
+    width: 50px;
+    height: 50px;
+}
 }
 /* #endregion Responsive*/
 

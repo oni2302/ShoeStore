@@ -16,7 +16,7 @@ namespace ShoeStore.Controllers
         }
         public ActionResult List()
         {
-            var customer = db.GetCustomer().ToList();
+            var customer = db.GetCustomer();
             ViewBag.CustomerList = customer;
             return View();
         }
@@ -27,7 +27,7 @@ namespace ShoeStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(UserReg_Result user)
+        public ActionResult Add(string a)
         {
             if (ModelState.IsValid)
             {

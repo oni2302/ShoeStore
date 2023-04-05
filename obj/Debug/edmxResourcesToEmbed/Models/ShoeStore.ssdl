@@ -7,6 +7,18 @@
     <Parameter Name="qty" Type="int" Mode="In" />
     <Parameter Name="message" Type="nvarchar" Mode="InOut" />
   </Function>
+  <Function Name="AuthenticateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AuthenticateRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="char" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Image" Type="varbinary(max)" Mode="In" />
+  </Function>
   <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductID" Type="int" Mode="In" />
   </Function>
@@ -29,19 +41,14 @@
   <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="productId" Type="int" Mode="In" />
   </Function>
+  <Function Name="getUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="InsertProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
     <Parameter Name="ProductPrice" Type="float" Mode="In" />
     <Parameter Name="ProductCategory" Type="int" Mode="In" />
     <Parameter Name="Description" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="RegValid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="username" Type="varchar" Mode="In" />
-    <Parameter Name="pass" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
-    <Parameter Name="sdt" Type="char" Mode="In" />
-    <Parameter Name="diachi" Type="nvarchar" Mode="In" />
-    <Parameter Name="tenkh" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="SearchProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
@@ -53,9 +60,10 @@
     <Parameter Name="ProductCategory" Type="int" Mode="In" />
     <Parameter Name="Description" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="UserReg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="username" Type="varchar" Mode="In" />
-    <Parameter Name="pass" Type="varchar" Mode="In" />
+  <Function Name="UploadImageToProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ImgData" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="ImgExt" Type="varchar" Mode="In" />
+    <Parameter Name="productId" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="ShoeStoreModelStoreContainer" />
 </Schema>

@@ -12,6 +12,18 @@
           <Parameter Name="qty" Type="int" Mode="In" />
           <Parameter Name="message" Type="nvarchar" Mode="InOut" />
         </Function>
+        <Function Name="AuthenticateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AuthenticateRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="char" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Image" Type="varbinary(max)" Mode="In" />
+        </Function>
         <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProductID" Type="int" Mode="In" />
         </Function>
@@ -34,19 +46,14 @@
         <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
+        <Function Name="getUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="InsertProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
           <Parameter Name="ProductPrice" Type="float" Mode="In" />
           <Parameter Name="ProductCategory" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="RegValid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="pass" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="sdt" Type="char" Mode="In" />
-          <Parameter Name="diachi" Type="nvarchar" Mode="In" />
-          <Parameter Name="tenkh" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="SearchProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
@@ -58,9 +65,10 @@
           <Parameter Name="ProductCategory" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="UserReg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="pass" Type="varchar" Mode="In" />
+        <Function Name="UploadImageToProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImgData" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="ImgExt" Type="varchar" Mode="In" />
+          <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="ShoeStoreModelStoreContainer" />
       </Schema></edmx:StorageModels>
@@ -75,15 +83,24 @@
             <Parameter Name="qty" Mode="In" Type="Int32" />
             <Parameter Name="message" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="AuthenticateRegister" ReturnType="Collection(String)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Image" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="DeleteProduct">
-            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+          <Parameter Name="ProductID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetColorOfProduct" ReturnType="Collection(ShoeStoreModel.GetColorOfProduct_Result)">
-            <Parameter Name="productId" Mode="In" Type="Int32" />
+          <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetCustomer" ReturnType="Collection(ShoeStoreModel.GetCustomer_Result)" />
+          <FunctionImport Name="GetCustomer" />
           <FunctionImport Name="GetProductDetail" ReturnType="Collection(ShoeStoreModel.GetProductDetail_Result)">
-            <Parameter Name="productId" Mode="In" Type="Int32" />
+          <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetProducts" ReturnType="Collection(ShoeStoreModel.GetProducts_Result)">
             <Parameter Name="qty" Mode="In" Type="Int32" />
@@ -95,7 +112,7 @@
             <Parameter Name="ColorId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
-            <Parameter Name="productId" Mode="In" Type="Int32" />
+          <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertProduct">
             <Parameter Name="ProductName" Mode="In" Type="String" />
@@ -103,16 +120,8 @@
             <Parameter Name="ProductCategory" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="RegValid">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="pass" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="sdt" Mode="In" Type="String" />
-            <Parameter Name="diachi" Mode="In" Type="String" />
-            <Parameter Name="tenkh" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SearchProduct" ReturnType="Collection(ShoeStoreModel.SearchProduct_Result)">
-            <Parameter Name="ProductName" Mode="In" Type="String" />
+          <Parameter Name="ProductName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UpdateProduct">
             <Parameter Name="ProductID" Mode="In" Type="Int32" />
@@ -121,24 +130,22 @@
             <Parameter Name="ProductCategory" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="UserReg" ReturnType="Collection(ShoeStoreModel.UserReg_Result)">
+          <FunctionImport Name="UploadImageToProduct" ReturnType="Collection(Decimal)">
+            <Parameter Name="ImgData" Mode="In" Type="Binary" />
+            <Parameter Name="ImgExt" Mode="In" Type="String" />
+            <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(String)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="pass" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetColorOfProduct_Result">
           <Property Type="Int32" Name="ColorId" Nullable="false" />
           <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ColorHexCode" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="GetCustomer_Result">
-          <Property Type="String" Name="id" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="tenkh" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="sdt" Nullable="true" MaxLength="11" />
-          <Property Type="String" Name="username" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="pass" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="diachi" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetProductDetail_Result">
           <Property Type="Int32" Name="ProductId" Nullable="false" />
@@ -179,9 +186,13 @@
           <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
         </ComplexType>
-        <ComplexType Name="UserReg_Result">
-          <Property Type="String" Name="username" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="pass" Nullable="true" MaxLength="30" />
+        <ComplexType Name="getUserSession_Result">
+          <Property Type="String" Name="CustomerUsername" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CustomerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CustomerPNum" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CustomerAddress" Nullable="true" MaxLength="200" />
+          <Property Type="Binary" Name="CustomerImage" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -190,6 +201,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities" >
           <FunctionImportMapping FunctionImportName="addSizeColor" FunctionName="ShoeStoreModel.Store.addSizeColor" />
+          <FunctionImportMapping FunctionImportName="AuthenticateRegister" FunctionName="ShoeStoreModel.Store.AuthenticateRegister" />
           <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="ShoeStoreModel.Store.DeleteProduct" />
           <FunctionImportMapping FunctionImportName="GetColorOfProduct" FunctionName="ShoeStoreModel.Store.GetColorOfProduct">
             <ResultMapping>
@@ -200,19 +212,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCustomer" FunctionName="ShoeStoreModel.Store.GetCustomer">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShoeStoreModel.GetCustomer_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tenkh" ColumnName="tenkh" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="sdt" ColumnName="sdt" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="diachi" ColumnName="diachi" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomer" FunctionName="ShoeStoreModel.Store.GetCustomer" />
           <FunctionImportMapping FunctionImportName="GetProductDetail" FunctionName="ShoeStoreModel.Store.GetProductDetail">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ShoeStoreModel.GetProductDetail_Result">
@@ -256,7 +256,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertProduct" FunctionName="ShoeStoreModel.Store.InsertProduct" />
-          <FunctionImportMapping FunctionImportName="RegValid" FunctionName="ShoeStoreModel.Store.RegValid" />
           <FunctionImportMapping FunctionImportName="SearchProduct" FunctionName="ShoeStoreModel.Store.SearchProduct">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ShoeStoreModel.SearchProduct_Result">
@@ -272,11 +271,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="ShoeStoreModel.Store.UpdateProduct" />
-          <FunctionImportMapping FunctionImportName="UserReg" FunctionName="ShoeStoreModel.Store.UserReg">
+          <FunctionImportMapping FunctionImportName="UploadImageToProduct" FunctionName="ShoeStoreModel.Store.UploadImageToProduct" />
+          <FunctionImportMapping FunctionImportName="AuthenticateLogin" FunctionName="ShoeStoreModel.Store.AuthenticateLogin" />
+          <FunctionImportMapping FunctionImportName="getUserSession" FunctionName="ShoeStoreModel.Store.getUserSession">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShoeStoreModel.UserReg_Result">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
+              <ComplexTypeMapping TypeName="ShoeStoreModel.getUserSession_Result">
+                <ScalarProperty Name="CustomerUsername" ColumnName="CustomerUsername" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerPNum" ColumnName="CustomerPNum" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerImage" ColumnName="CustomerImage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

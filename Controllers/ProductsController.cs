@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Protocols;
 
 namespace ShoeStore.Controllers
 {
@@ -19,11 +20,11 @@ namespace ShoeStore.Controllers
             ViewBag.TrendingProducts = trending;
             return View();
         }
-        [Route(Name = "SanPham")]
-        public ActionResult List()
+        public ActionResult List(string category)
         {
             ShoeStoreEntities db = new ShoeStoreEntities();
-            var product =db.GetProducts(null, null).ToList();
+            var product =db.GetProducts(null, category).ToList();
+            ViewBag.Category = (category!=null)?category:"Colection"+$" ({product.Count})";
             ViewBag.Product = product;
             return View();
         }

@@ -15,13 +15,31 @@ namespace ShoeStore
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-              name: "SanPham",
-              url: "sanpham/loai/{id}",
+              name: "trangchu",
+              url: "trangchu",
+              defaults: new
+              {
+                  action = "Home",
+                  controller = "Products"
+              }
+            );
+            routes.MapRoute(
+              name: "danhsachsanpham",
+              url: "danhsachsanpham",
+              defaults: new
+              {
+                  action = "List",
+                  controller = "Products"
+              }
+            );
+            routes.MapRoute(
+              name: "category",
+              url: "loai/{category}",
               defaults: new
               {
                   action = "List",
                   controller = "Products",
-                  id = UrlParameter.Optional
+                  category = UrlParameter.Optional
               }
             );
             routes.MapRoute(
@@ -136,7 +154,6 @@ namespace ShoeStore
                   controller = "Product"
               }
             );
-
             /* Ngoại lệ*/
             routes.MapRoute(
               name: "Default",
