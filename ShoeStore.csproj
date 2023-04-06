@@ -688,6 +688,9 @@
     <Compile Include="Models\GetSizeOfProduct_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetUserCart_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\getUserSession_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>

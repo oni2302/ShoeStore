@@ -22,7 +22,30 @@ namespace ShoeStore.Controllers
         public string AddToCart()
         {
             int id = int.Parse(Request.Form["id"]);
-            Carts carts = new Carts();  
+            Carts carts = new Carts();
+
+
+            //Kiểm tra có user đăng nhập hay chưa
+            if (Session[CommonConstants.USER_SESSION]!=null)
+            {
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (Session[CommonConstants.CART_SESSION] == null)
             {
                 Session.Add(CommonConstants.USER_SESSION, carts);

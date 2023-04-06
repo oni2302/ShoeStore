@@ -242,5 +242,14 @@ namespace ShoeStore.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUserSession_Result>("getUserSession", usernameParameter);
         }
+    
+        public virtual ObjectResult<GetUserCart_Result> GetUserCart(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCart_Result>("GetUserCart", usernameParameter);
+        }
     }
 }

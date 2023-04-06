@@ -46,6 +46,9 @@
         <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetUserCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="getUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
         </Function>
@@ -139,6 +142,9 @@
           <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserCart" ReturnType="Collection(ShoeStoreModel.GetUserCart_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -193,6 +199,16 @@
           <Property Type="String" Name="CustomerPNum" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="CustomerAddress" Nullable="true" MaxLength="200" />
           <Property Type="Binary" Name="CustomerImage" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUserCart_Result">
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="PCS_Id" Nullable="false" />
+          <Property Type="Int32" Name="Available" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+          <Property Type="Double" Name="ProductPrice" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+          <Property Type="Double" Name="SizeValue" Nullable="true" />
+          <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -282,6 +298,20 @@
                 <ScalarProperty Name="CustomerPNum" ColumnName="CustomerPNum" />
                 <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
                 <ScalarProperty Name="CustomerImage" ColumnName="CustomerImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserCart" FunctionName="ShoeStoreModel.Store.GetUserCart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetUserCart_Result">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PCS_Id" ColumnName="PCS_Id" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="SizeValue" ColumnName="SizeValue" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
