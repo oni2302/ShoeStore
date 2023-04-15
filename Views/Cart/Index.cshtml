@@ -10,46 +10,50 @@
 <div class="cart-wrarper">
     <div class="cart-product-wrapper">
         <h2>Cart</h2><br />
-        <div class="cart-product">
-            <div class="cart-product-image-wrapper">
-                <img src="~/Images/air.png"/>
-            </div>
-            <div class="cart-product-detail-wrapper">
-                <div class="cart-product-detail">
-                    <div class="cart-product-detail-name">
-                        Nike Ari Force 1
-                    </div>
-                    <div class="cart-product-detail-category">
-                        Women’s Shoe
-                    </div>
-                    <div class="cart-product-detail-color-size-wrapper">
-                        <div class="cart-product-detail-color">
-                            Black
+        @foreach (var product in ViewBag.Cart as List<ShoeStore.Models.GetCartOfUser_Result>)
+        {
+            <div class="cart-product">
+                <div class="cart-product-image-wrapper">
+                    <img src="data:image/@product.ImageExtension;base64,@Convert.ToBase64String(product.ImageData)"/>
+                </div>
+                <div class="cart-product-detail-wrapper">
+                    <div class="cart-product-detail">
+                        <div class="cart-product-detail-name">
+                            @product.ProductName
                         </div>
-                        <div class="cart-product-detail-size">
-                            Size  37.5
+                        <div class="cart-product-detail-category">
+                            @product.CategoryName
                         </div>
-                    </div>
-                    <div class="cart-product-detail-quantity">
-                        Quantity 1
-                    </div>
+                        <div class="cart-product-detail-color-size-wrapper">
+                            <div class="cart-product-detail-color">
+                                @product.ColorName
+                            </div>
+                            <div class="cart-product-detail-size">
+                                Size  @product.SizeValue
+                            </div>
+                        </div>
+                        <div class="cart-product-detail-quantity">
+                            Quantity @product.Quantity
+                        </div>
 
-                </div>
-                <div class="cart-product-price">
-                    <h5>1231234d</h5>
-                    <div class="cart-product-detail-delete">
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 28 29" fill="none">
-                                <path d="M24.0635 13.0214V26.9699C24.0635 27.4617 23.6764 27.8603 23.1987 27.8603H4.74817C4.27052 27.8603 3.8833 27.4617 3.8833 26.9699V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M11.0913 21.9247V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M16.8564 21.9247V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M26.946 7.08581H19.7388M1 7.08581H8.20723M8.20723 7.08581V2.0406C8.20723 1.54888 8.59445 1.15027 9.0721 1.15027H18.8739C19.3516 1.15027 19.7388 1.54888 19.7388 2.0406V7.08581M8.20723 7.08581H19.7388" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                    </div>
+                    <div class="cart-product-price">
+                        <h5>@Html.Raw(product.ProductPrice*@product.Quantity+ "₫")</h5>
+                        <div class="cart-product-detail-delete">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 28 29" fill="none">
+                                    <path d="M24.0635 13.0214V26.9699C24.0635 27.4617 23.6764 27.8603 23.1987 27.8603H4.74817C4.27052 27.8603 3.8833 27.4617 3.8833 26.9699V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M11.0913 21.9247V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16.8564 21.9247V13.0214" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M26.946 7.08581H19.7388M1 7.08581H8.20723M8.20723 7.08581V2.0406C8.20723 1.54888 8.59445 1.15027 9.0721 1.15027H18.8739C19.3516 1.15027 19.7388 1.54888 19.7388 2.0406V7.08581M8.20723 7.08581H19.7388" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        }
     </div>
     <div class="cart-info-wrapper">
         <h2>Summary</h2>
@@ -97,69 +101,80 @@
 @section Styles
 {
     <style type="text/css">
-        .cart-wrarper{
-            display:flex;
-            padding:2em;
-            gap:4em;
-            max-width:1920px;
-            margin:auto;
-            justify-content:center;
-            user-select:none;
+        .cart-wrarper {
+            display: flex;
+            padding: 2em;
+            gap: 4em;
+            max-width: 1920px;
+            margin: auto;
+            justify-content: center;
+            user-select: none;
         }
-            .cart-wrarper .cart-product-wrapper{
-                display:flex;
-                flex-direction:column;
-                flex-basis:55%;
+
+            .cart-wrarper .cart-product-wrapper {
+                display: flex;
+                flex-direction: column;
+                flex-basis: 55%;
             }
+
                 .cart-wrarper .cart-product-wrapper .cart-product {
-                    display:flex;
-                    border-bottom:1px solid gray;
-                    padding:1em;
-                    gap:1em;
+                    display: flex;
+                    border-bottom: 1px solid gray;
+                    padding: 1em;
+                    gap: 1em;
                 }
-                    .cart-wrarper .cart-product-wrapper .cart-product .cart-product-image-wrapper{
-                        width:fit-content;
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
+
+                    .cart-wrarper .cart-product-wrapper .cart-product .cart-product-image-wrapper {
+                        width: fit-content;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
-                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-image-wrapper img{
-                            height:9em;
-                            object-fit:cover;
-                            aspect-ratio:1/1;
+
+                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-image-wrapper img {
+                            height: 9em;
+                            object-fit: cover;
+                            aspect-ratio: 1/1;
                         }
-                    .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper{
-                        flex-basis:100%;
-                        display:flex;
-                        justify-content:space-between;
+
+                    .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper {
+                        flex-basis: 100%;
+                        display: flex;
+                        justify-content: space-between;
                     }
-                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail{
-                            display:flex;
-                            flex-direction:column;
-                            color:gray;
-                            flex-basis:35%;
+
+                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail {
+                            display: flex;
+                            flex-direction: column;
+                            color: gray;
+                            flex-basis: 35%;
                         }
-                            .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail .cart-product-detail-name{
-                                font-weight:bold;
-                                font-size:1.3em;
-                                color:black;
+
+                            .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail .cart-product-detail-name {
+                                font-weight: bold;
+                                font-size: 1.3em;
+                                color: black;
                             }
+
                             .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail .cart-product-detail-category {
                                 font-size: 1.2em;
                             }
+
                             .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail .cart-product-detail-color-size-wrapper {
                                 font-size: 1.2em;
                                 display: flex;
                                 justify-content: space-between;
                             }
+
                             .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-detail .cart-product-detail-quantity {
                                 font-size: 1.2em;
                             }
-                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-price{
-                            display:flex;
-                            flex-direction:column;
-                            justify-content:space-between;
-                            align-items:flex-end;
+
+                        .cart-wrarper .cart-product-wrapper .cart-product .cart-product-detail-wrapper .cart-product-price {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            align-items: flex-end;
                         }
 
             /*#region Cart infomation */
@@ -180,26 +195,32 @@
                         display: flex;
                         justify-content: space-between;
                     }
-                        .cart-wrarper .cart-info-wrapper .cart-info .cart-info-subtotal-wrapper .cart-info-subtotal{
-                            font-size:1.3em;
+
+                        .cart-wrarper .cart-info-wrapper .cart-info .cart-info-subtotal-wrapper .cart-info-subtotal {
+                            font-size: 1.3em;
                         }
+
                         .cart-wrarper .cart-info-wrapper .cart-info .cart-info-subtotal-wrapper .cart-info-subtotal-price {
                             font-size: 1.2em;
-                            font-weight:600;
+                            font-weight: 600;
                         }
+
                     .cart-wrarper .cart-info-wrapper .cart-info .cart-info-fee-wrapper {
                         display: flex;
                         justify-content: space-between;
-                        padding-bottom:1em;
+                        padding-bottom: 1em;
                         border-bottom: .5px solid #D9D9D9;
                     }
+
                         .cart-wrarper .cart-info-wrapper .cart-info .cart-info-fee-wrapper .cart-info-fee {
-                            font-size:1.3em;
+                            font-size: 1.3em;
                         }
+
                         .cart-wrarper .cart-info-wrapper .cart-info .cart-info-fee-wrapper .cart-info-fee-price {
                             font-size: 1.2em;
                             font-weight: 600;
                         }
+
                     .cart-wrarper .cart-info-wrapper .cart-info .cart-info-total-wrapper {
                         display: flex;
                         justify-content: space-between;
@@ -214,29 +235,31 @@
                             font-weight: 600;
                             color: red;
                         }
+
                     .cart-wrarper .cart-info-wrapper .cart-info a {
-                        width:50%;
-                        color:black;
-                        cursor:pointer;
-                        text-align:center;
-                        margin:auto;
-                        padding:.85em 0;
+                        width: 50%;
+                        color: black;
+                        cursor: pointer;
+                        text-align: center;
+                        margin: auto;
+                        padding: .85em 0;
                         border: 1px solid black;
-                        text-decoration:none;
-                        border-radius:100px;
-                        user-select:none;
-                        font-size:1.2em;
+                        text-decoration: none;
+                        border-radius: 100px;
+                        user-select: none;
+                        font-size: 1.2em;
                     }
-                    .cart-wrarper .cart-info-wrapper .cart-info a:hover {
-                        color: white;
-                        background:black;
-                    }
-                    /*#endregion Cart infomation */
-                    @@media only screen and (max-width: 1000px) {
-                        .cart-wrarper {
-                                flex-direction: column;
-                            }
+
+                        .cart-wrarper .cart-info-wrapper .cart-info a:hover {
+                            color: white;
+                            background: black;
                         }
+        /*#endregion Cart infomation */
+        @@media only screen and (max-width: 1000px) {
+            .cart-wrarper {
+                flex-direction: column;
+            }
+        }
     </style>
 }
 

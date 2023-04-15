@@ -39,7 +39,7 @@
             </div>
             <div class="detail-info-size">
                 <span>Size</span>
-                <select name="size" id="">
+                <select name="size" id="size">
                     @foreach (var size in ViewBag.Size)
                     {
                         <option value="@size.SizeId">@size.SizeValue</option>
@@ -48,7 +48,7 @@
             </div>
             <div class="detail-info-color">
                 <span>Color</span>
-                <select name="color" id="">
+                <select name="color" id="color">
                     @foreach (var color in ViewBag.Color)
                     {
                         <option value="@color.ColorId">@color.ColorName</option>
@@ -66,12 +66,18 @@
     <!-- Phần dưới-->
     <div class="detail-sub"></div>
 </div>
+
+
+
 <script>
     $("#themgiohang").click(function () {
+        let size = document.querySelector('#size');
+        let color = document.querySelector('#color');
+
         $.ajax({
             type: "POST",
             url: "@Url.RouteUrl("ThemGioHang")",
-            data: { id: "@ViewBag.ProductDetail.ProductId" },
+            data: { id: "@ViewBag.ProductDetail.ProductId", size: size.value , color : color.value },
             success: function (msg) {
                 alert(msg);
             }

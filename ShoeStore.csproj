@@ -681,6 +681,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetCartOfUser_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetColorOfProduct_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
@@ -697,9 +700,6 @@
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSize_Result.cs">
-      <DependentUpon>ShoeStore.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GetUserCart_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getUserSession_Result.cs">

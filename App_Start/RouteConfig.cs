@@ -46,14 +46,14 @@ namespace ShoeStore
 
 
             // Tự động thêm route bên trên 
-            foreach (var item in RouteItem.customerRoutes)
-            {
-                routes.MapRoute(
-                    name: item.Name,
-                    url: item.Url,
-                    defaults: new { controller = item.Controler, action = item.Action, id = UrlParameter.Optional }
-                );
-            }
+            //foreach (var item in RouteItem.customerRoutes)
+            //{
+            //    routes.MapRoute(
+            //        name: item.Name,
+            //        url: item.Url,
+            //        defaults: new { controller = item.Controler, action = item.Action, id = UrlParameter.Optional }
+            //    );
+            //}
 
 
 

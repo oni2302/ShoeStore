@@ -43,7 +43,7 @@
     <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
       <Parameter Name="productId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="GetUserCart" ReturnType="Collection(ShoeStoreModel.GetUserCart_Result)">
+    <FunctionImport Name="GetUserCart">
       <Parameter Name="username" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
@@ -69,6 +69,15 @@
       <Parameter Name="ImgData" Mode="In" Type="Binary" />
       <Parameter Name="ImgExt" Mode="In" Type="String" />
       <Parameter Name="productId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AddToCart">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="ProductId" Mode="In" Type="Int32" />
+      <Parameter Name="size" Mode="In" Type="Int32" />
+      <Parameter Name="color" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCartOfUser" ReturnType="Collection(ShoeStoreModel.GetCartOfUser_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetColor_Result">
@@ -112,16 +121,6 @@
     <Property Type="Int32" Name="SizeId" Nullable="false" />
     <Property Type="Double" Name="SizeValue" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="GetUserCart_Result">
-    <Property Type="Int32" Name="Quantity" Nullable="true" />
-    <Property Type="Int32" Name="PCS_Id" Nullable="false" />
-    <Property Type="Int32" Name="Available" Nullable="true" />
-    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
-    <Property Type="Double" Name="ProductPrice" Nullable="true" />
-    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
-    <Property Type="Double" Name="SizeValue" Nullable="true" />
-    <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
-  </ComplexType>
   <ComplexType Name="getUserSession_Result">
     <Property Type="String" Name="CustomerUsername" Nullable="false" MaxLength="100" />
     <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
@@ -138,5 +137,17 @@
     <Property Type="Int32" Name="ProductCategory" Nullable="true" />
     <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
     <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetCartOfUser_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+    <Property Type="Double" Name="ProductPrice" Nullable="true" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="SizeValue" Nullable="true" />
+    <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="ImageData" Nullable="true" />
+    <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
   </ComplexType>
 </Schema>

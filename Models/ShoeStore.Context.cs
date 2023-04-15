@@ -172,13 +172,13 @@ namespace ShoeStore.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSizeOfProduct_Result>("GetSizeOfProduct", productIdParameter);
         }
     
-        public virtual ObjectResult<GetUserCart_Result> GetUserCart(string username)
+        public virtual int GetUserCart(string username)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCart_Result>("GetUserCart", usernameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetUserCart", usernameParameter);
         }
     
         public virtual ObjectResult<getUserSession_Result> getUserSession(string username)
@@ -260,6 +260,36 @@ namespace ShoeStore.Models
                 new ObjectParameter("productId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("UploadImageToProduct", imgDataParameter, imgExtParameter, productIdParameter);
+        }
+    
+        public virtual int AddToCart(string username, Nullable<int> productId, Nullable<int> size, Nullable<int> color)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var productIdParameter = productId.HasValue ?
+                new ObjectParameter("ProductId", productId) :
+                new ObjectParameter("ProductId", typeof(int));
+    
+            var sizeParameter = size.HasValue ?
+                new ObjectParameter("size", size) :
+                new ObjectParameter("size", typeof(int));
+    
+            var colorParameter = color.HasValue ?
+                new ObjectParameter("color", color) :
+                new ObjectParameter("color", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddToCart", usernameParameter, productIdParameter, sizeParameter, colorParameter);
+        }
+    
+        public virtual ObjectResult<GetCartOfUser_Result> GetCartOfUser(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCartOfUser_Result>("GetCartOfUser", usernameParameter);
         }
     }
 }

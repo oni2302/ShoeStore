@@ -15,57 +15,46 @@ namespace ShoeStore.Controllers
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            List<CartProduct> ShoppingCart = Session[CommonConstants.CART_SESSION] as List<CartProduct>;
+            var user = Session[CommonConstants.USER_SESSION] as getUserSession_Result;
+            var cart = db.GetCartOfUser(user.CustomerUsername).ToList();
+            ViewBag.Cart = cart;
             return View();
         }
         [HttpPost]
         public string AddToCart()
         {
             int id = int.Parse(Request.Form["id"]);
+            int size = int.Parse(Request.Form["size"]);
+            int color = int.Parse(Request.Form["color"]);
             Carts carts = new Carts();
-
 
             //Kiểm tra có user đăng nhập hay chưa
             if (Session[CommonConstants.USER_SESSION]!=null)
             {
-
+                var user = Session[CommonConstants.USER_SESSION] as getUserSession_Result;
+                db.AddToCart(user.CustomerUsername, id ,size , color);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if (Session[CommonConstants.CART_SESSION] == null)
-            {
-                Session.Add(CommonConstants.USER_SESSION, carts);
-            }
-            else
-            {
-                carts = Session[CommonConstants.CART_SESSION] as Carts;
-            }
-            var data = db.GetProductDetail(id).Single();
-            CartProduct cartProduct = new CartProduct(1,data.ProductId,data.ProductName,new byte[1],(double)(data.ProductPrice));
-            int kiemtra = carts.KiemTraGioHang(cartProduct);
-            if (kiemtra==-1)
-            {
-                carts.products.Add(cartProduct);
-            }
-            else
-            {
-                carts.products[kiemtra].Quantity++;
-            }
-            Session[CommonConstants.CART_SESSION] = carts;
+            else { return "Chưa đăng nhập "; }
+            //if (Session[CommonConstants.CART_SESSION] == null)
+            //{
+            //    Session.Add(CommonConstants.USER_SESSION, carts);
+            //}
+            //else
+            //{
+            //    carts = Session[CommonConstants.CART_SESSION] as Carts;
+            //}
+            //var data = db.GetProductDetail(id).Single();
+            //CartProduct cartProduct = new CartProduct(1,data.ProductId,data.ProductName,new byte[1],(double)(data.ProductPrice));
+            //int kiemtra = carts.KiemTraGioHang(cartProduct);
+            //if (kiemtra==-1)
+            //{
+            //    carts.products.Add(cartProduct);
+            //}
+            //else
+            //{
+            //    carts.products[kiemtra].Quantity++;
+            //}
+            //Session[CommonConstants.CART_SESSION] = carts;
             return "Đã thêm";
         }
            
