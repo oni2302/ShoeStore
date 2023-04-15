@@ -48,6 +48,9 @@
       <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -284,8 +287,8 @@
     <Content Include="Images\slider1.png" />
     <Content Include="Models\ShoeStore.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ShoeStore.Context.cs</LastGenOutput>
       <DependentUpon>ShoeStore.edmx</DependentUpon>
+      <LastGenOutput>ShoeStore.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ShoeStore.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -372,6 +375,14 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\ShoeStore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ShoeStore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ShoeStore.edmx.diagram">
+      <DependentUpon>ShoeStore.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Product\ThemImage.cshtml" />
     <None Include="packages.config" />
     <None Include="packages\jQuery.3.6.4\Content\Scripts\jquery-3.6.4-vsdoc.js" />
     <Content Include="packages\jQuery.3.6.4\Content\Scripts\jquery-3.6.4.js" />
@@ -499,13 +510,6 @@
     <Content Include="packages\WebGrease.1.5.2\tools\WG.exe" />
     <Content Include="Scripts\app\_MasterLayout.js" />
     <Content Include="Content\app\logo_font.ttf" />
-    <EntityDeploy Include="Models\ShoeStore.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ShoeStore.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ShoeStore.edmx.diagram">
-      <DependentUpon>ShoeStore.edmx</DependentUpon>
-    </Content>
     <Content Include="Images\test_img.webp" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -665,6 +669,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\RouteItem.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -679,6 +684,9 @@
     <Compile Include="Models\GetColorOfProduct_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetColor_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetProductDetail_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
@@ -686,6 +694,9 @@
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSizeOfProduct_Result.cs">
+      <DependentUpon>ShoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSize_Result.cs">
       <DependentUpon>ShoeStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetUserCart_Result.cs">

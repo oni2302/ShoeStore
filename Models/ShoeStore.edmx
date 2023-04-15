@@ -10,7 +10,6 @@
           <Parameter Name="sizeId" Type="int" Mode="In" />
           <Parameter Name="colorId" Type="int" Mode="In" />
           <Parameter Name="qty" Type="int" Mode="In" />
-          <Parameter Name="message" Type="nvarchar" Mode="InOut" />
         </Function>
         <Function Name="AuthenticateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
@@ -27,6 +26,7 @@
         <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProductID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetColorOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
@@ -43,6 +43,7 @@
           <Parameter Name="sizeId" Type="int" Mode="In" />
           <Parameter Name="ColorId" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="productId" Type="int" Mode="In" />
         </Function>
@@ -84,7 +85,9 @@
             <Parameter Name="sizeId" Mode="In" Type="Int32" />
             <Parameter Name="colorId" Mode="In" Type="Int32" />
             <Parameter Name="qty" Mode="In" Type="Int32" />
-            <Parameter Name="message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(String)">
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AuthenticateRegister" ReturnType="Collection(String)">
             <Parameter Name="Username" Mode="In" Type="String" />
@@ -98,6 +101,7 @@
           <FunctionImport Name="DeleteProduct">
           <Parameter Name="ProductID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetColor" ReturnType="Collection(ShoeStoreModel.GetColor_Result)" />
           <FunctionImport Name="GetColorOfProduct" ReturnType="Collection(ShoeStoreModel.GetColorOfProduct_Result)">
           <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -114,8 +118,15 @@
             <Parameter Name="sizeId" Mode="In" Type="Int32" />
             <Parameter Name="ColorId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetSize" ReturnType="Collection(ShoeStoreModel.GetSize_Result)" />
           <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
           <Parameter Name="productId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserCart" ReturnType="Collection(ShoeStoreModel.GetUserCart_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertProduct">
             <Parameter Name="ProductName" Mode="In" Type="String" />
@@ -138,16 +149,12 @@
             <Parameter Name="ImgExt" Mode="In" Type="String" />
             <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(String)">
-          <Parameter Name="username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
-          <Parameter Name="username" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="GetUserCart" ReturnType="Collection(ShoeStoreModel.GetUserCart_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetColor_Result">
+          <Property Type="Int32" Name="ColorId" Nullable="false" />
+          <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ColorHexCode" Nullable="true" MaxLength="10" />
+        </ComplexType>
         <ComplexType Name="GetColorOfProduct_Result">
           <Property Type="Int32" Name="ColorId" Nullable="false" />
           <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
@@ -158,7 +165,6 @@
           <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
           <Property Type="Double" Name="ProductPrice" Nullable="true" />
           <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
           <Property Type="Int32" Name="ProductCategory" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
@@ -169,7 +175,6 @@
           <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
           <Property Type="Double" Name="ProductPrice" Nullable="true" />
           <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
           <Property Type="Int32" Name="ProductCategory" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
           <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
@@ -178,27 +183,13 @@
           <Property Type="Binary" Name="ImageData" Nullable="true" />
           <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="GetSizeOfProduct_Result">
+        <ComplexType Name="GetSize_Result">
           <Property Type="Int32" Name="SizeId" Nullable="false" />
           <Property Type="Double" Name="SizeValue" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="SearchProduct_Result">
-          <Property Type="Int32" Name="ProductId" Nullable="false" />
-          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
-          <Property Type="Double" Name="ProductPrice" Nullable="true" />
-          <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
-          <Property Type="Int32" Name="ProductCategory" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="getUserSession_Result">
-          <Property Type="String" Name="CustomerUsername" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CustomerEmail" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CustomerPNum" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="CustomerAddress" Nullable="true" MaxLength="200" />
-          <Property Type="Binary" Name="CustomerImage" Nullable="true" />
+        <ComplexType Name="GetSizeOfProduct_Result">
+          <Property Type="Int32" Name="SizeId" Nullable="false" />
+          <Property Type="Double" Name="SizeValue" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetUserCart_Result">
           <Property Type="Int32" Name="Quantity" Nullable="true" />
@@ -210,15 +201,42 @@
           <Property Type="Double" Name="SizeValue" Nullable="true" />
           <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        </Schema>
+        <ComplexType Name="getUserSession_Result">
+          <Property Type="String" Name="CustomerUsername" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CustomerEmail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CustomerPNum" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CustomerAddress" Nullable="true" MaxLength="200" />
+          <Property Type="Binary" Name="CustomerImage" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SearchProduct_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+          <Property Type="Double" Name="ProductPrice" Nullable="true" />
+          <Property Type="Int32" Name="ProductViewer" Nullable="true" />
+          <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ShoeStoreModelStoreContainer" CdmEntityContainer="ShoeStoreEntities" >
           <FunctionImportMapping FunctionImportName="addSizeColor" FunctionName="ShoeStoreModel.Store.addSizeColor" />
+          <FunctionImportMapping FunctionImportName="AuthenticateLogin" FunctionName="ShoeStoreModel.Store.AuthenticateLogin" />
           <FunctionImportMapping FunctionImportName="AuthenticateRegister" FunctionName="ShoeStoreModel.Store.AuthenticateRegister" />
           <FunctionImportMapping FunctionImportName="DeleteProduct" FunctionName="ShoeStoreModel.Store.DeleteProduct" />
+          <FunctionImportMapping FunctionImportName="GetColor" FunctionName="ShoeStoreModel.Store.GetColor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetColor_Result">
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+                <ScalarProperty Name="ColorHexCode" ColumnName="ColorHexCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetColorOfProduct" FunctionName="ShoeStoreModel.Store.GetColorOfProduct">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ShoeStoreModel.GetColorOfProduct_Result">
@@ -236,7 +254,6 @@
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
                 <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -251,7 +268,6 @@
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
                 <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -263,41 +279,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetQuantity" FunctionName="ShoeStoreModel.Store.GetQuantity" />
-          <FunctionImportMapping FunctionImportName="GetSizeOfProduct" FunctionName="ShoeStoreModel.Store.GetSizeOfProduct">
+          <FunctionImportMapping FunctionImportName="GetSize" FunctionName="ShoeStoreModel.Store.GetSize">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShoeStoreModel.GetSizeOfProduct_Result">
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetSize_Result">
                 <ScalarProperty Name="SizeId" ColumnName="SizeId" />
                 <ScalarProperty Name="SizeValue" ColumnName="SizeValue" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="InsertProduct" FunctionName="ShoeStoreModel.Store.InsertProduct" />
-          <FunctionImportMapping FunctionImportName="SearchProduct" FunctionName="ShoeStoreModel.Store.SearchProduct">
+          <FunctionImportMapping FunctionImportName="GetSizeOfProduct" FunctionName="ShoeStoreModel.Store.GetSizeOfProduct">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ShoeStoreModel.SearchProduct_Result">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
-                <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="ShoeStoreModel.Store.UpdateProduct" />
-          <FunctionImportMapping FunctionImportName="UploadImageToProduct" FunctionName="ShoeStoreModel.Store.UploadImageToProduct" />
-          <FunctionImportMapping FunctionImportName="AuthenticateLogin" FunctionName="ShoeStoreModel.Store.AuthenticateLogin" />
-          <FunctionImportMapping FunctionImportName="getUserSession" FunctionName="ShoeStoreModel.Store.getUserSession">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ShoeStoreModel.getUserSession_Result">
-                <ScalarProperty Name="CustomerUsername" ColumnName="CustomerUsername" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-                <ScalarProperty Name="CustomerPNum" ColumnName="CustomerPNum" />
-                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
-                <ScalarProperty Name="CustomerImage" ColumnName="CustomerImage" />
+              <ComplexTypeMapping TypeName="ShoeStoreModel.GetSizeOfProduct_Result">
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="SizeValue" ColumnName="SizeValue" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -315,6 +309,34 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getUserSession" FunctionName="ShoeStoreModel.Store.getUserSession">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.getUserSession_Result">
+                <ScalarProperty Name="CustomerUsername" ColumnName="CustomerUsername" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerPNum" ColumnName="CustomerPNum" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerImage" ColumnName="CustomerImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertProduct" FunctionName="ShoeStoreModel.Store.InsertProduct" />
+          <FunctionImportMapping FunctionImportName="SearchProduct" FunctionName="ShoeStoreModel.Store.SearchProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShoeStoreModel.SearchProduct_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ProductViewer" ColumnName="ProductViewer" />
+                <ScalarProperty Name="ProductCategory" ColumnName="ProductCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateProduct" FunctionName="ShoeStoreModel.Store.UpdateProduct" />
+          <FunctionImportMapping FunctionImportName="UploadImageToProduct" FunctionName="ShoeStoreModel.Store.UploadImageToProduct" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

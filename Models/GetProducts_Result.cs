@@ -17,7 +17,6 @@ namespace ShoeStore.Models
         public string ProductName { get; set; }
         public Nullable<double> ProductPrice { get; set; }
         public Nullable<int> ProductViewer { get; set; }
-        public Nullable<int> Quantity { get; set; }
         public Nullable<int> ProductCategory { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> Date { get; set; }

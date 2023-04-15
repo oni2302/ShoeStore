@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
@@ -13,7 +14,7 @@ namespace ShoeStore.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        
+
         public ActionResult Manager()
         {
             ShoeStoreEntities db = new ShoeStoreEntities();
@@ -31,19 +32,23 @@ namespace ShoeStore.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThemSanPham([Bind(Include = "ProductName, ProductPrice, ProductCategory, Description")]GetProductDetail_Result product)
+        public ActionResult ThemSanPham([Bind(Include = "ProductName, ProductPrice, ProductCategory, Description")] GetProductDetail_Result product)
         {
             ShoeStoreEntities db = new ShoeStoreEntities();
             db.InsertProduct(product.ProductName, product.ProductPrice, product.ProductCategory, product.Description);
             db.SaveChanges();
             return RedirectToAction("Manager");
         }
-      
+
         public ActionResult SuaSanPham(int? id)
         {
             ShoeStoreEntities db = new ShoeStoreEntities();
             var ListProduct = db.GetProductDetail(id).Single();
             ViewBag.sua = ListProduct;
+            var color = db.GetColor();
+            ViewBag.Color = color;
+            var size = db.GetSize();
+            ViewBag.Size = size;
             return View();
         }
 
@@ -51,13 +56,53 @@ namespace ShoeStore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SuaSanPham()
         {
-            int Id = int.Parse( Request.Form["ProductID"]);
+            int Id = int.Parse(Request.Form["ProductID"]);
             var Name = Request.Form["ProductName"];
             double Price = double.Parse(Request.Form["ProductPrice"]);
             int Cate = int.Parse(Request.Form["ProductCategory"]);
             var Des = Request.Form["Description"];
             ShoeStoreEntities db = new ShoeStoreEntities();
-            db.UpdateProduct(Id,Name,Price,Cate,Des);
+            db.UpdateProduct(Id, Name, Price, Cate, Des);
+            db.SaveChanges();
+            return RedirectToAction("Manager");
+        }
+
+        public ActionResult ThemImage(int? id)
+        {
+            ShoeStoreEntities db = new ShoeStoreEntities();
+            var ListProduct = db.GetProductDetail(id).Single();
+            ViewBag.sua = ListProduct;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ThemImage(HttpPostedFileBase anh)
+        {
+            int Id = int.Parse(Request.Form["ProductID"]);
+            var ImageExtension = Request.Form["ImageExtension"];
+            byte[] buffer = null;
+            if (anh != null)
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                anh.InputStream.CopyTo(memoryStream);
+                buffer = memoryStream.ToArray();
+            }
+            ShoeStoreEntities db = new ShoeStoreEntities();
+            db.UploadImageToProduct(buffer, ImageExtension, Id);
+            db.SaveChanges();
+            return RedirectToAction("Manager");
+        }
+
+        [HttpPost]
+        public ActionResult ThemThongTin()
+        {
+            int Id = int.Parse(Request.Form["ProductID"]);
+            var mau = int.Parse(Request.Form["mau"]);
+            var size = int.Parse(Request.Form["size"]);
+            var soluong = int.Parse(Request.Form["Soluong"]);
+            ShoeStoreEntities db = new ShoeStoreEntities();
+            db.addSizeColor(Id, size, mau, soluong);
             db.SaveChanges();
             return RedirectToAction("Manager");
         }

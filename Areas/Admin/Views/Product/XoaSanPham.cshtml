@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "XoaSanPham";
-    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -14,7 +14,7 @@
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    <label for="" class="form-label my-3">ProductName</label>
+                    <label for="" class="form-label my-3">Tên</label>
                 </dt>
 
                 <dd>
@@ -22,7 +22,7 @@
                 </dd>
 
                 <dt>
-                    <label for="" class="form-label my-3">ProductPrice</label>
+                    <label for="" class="form-label my-3">Giá</label>
                 </dt>
 
                 <dd>
@@ -30,16 +30,16 @@
                 </dd>
 
 
-                <dt>
-                    <label for="" class="form-label my-3">ProductViewer</label>
-                </dt>
+                @*<dt>
+            <label for="" class="form-label my-3"></label>
+        </dt>
 
-                <dd>
-                    @ViewBag.xoa.ProductViewer
-                </dd>
+        <dd>
+            @ViewBag.xoa.ProductViewer
+        </dd>*@
 
                 <dt>
-                    <label for="" class="form-label my-3">Quantity</label>
+                    <label for="" class="form-label my-3">Số lượng</label>
                 </dt>
 
                 <dd>
@@ -47,7 +47,7 @@
                 </dd>
 
                 <dt>
-                    <label for="" class="form-label my-3">Date</label>
+                    <label for="" class="form-label my-3">Ngày</label>
                 </dt>
 
                 <dd>
@@ -55,7 +55,7 @@
                 </dd>
 
                 <dt>
-                    <label for="" class="form-label my-3">Description</label>
+                    <label for="" class="form-label my-3">Mô tả</label>
                 </dt>
 
                 <dd>
@@ -63,7 +63,7 @@
                 </dd>
             </dl>
 
-            
+
 
             <div class="form-actions no-color" style="display:flex; justify-content: center;">
 
@@ -71,7 +71,7 @@
                 <button class="btn btn-success m-1" name="ProductID" style="border-radius: 1.5rem; width: 100px; margin-left: 15px;" type="submit" value="@ViewBag.xoa.ProductId">Xóa</button>
 
             </div>
-            
+
         </div>
     </div>
 }

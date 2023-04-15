@@ -6,7 +6,9 @@
       <Parameter Name="sizeId" Mode="In" Type="Int32" />
       <Parameter Name="colorId" Mode="In" Type="Int32" />
       <Parameter Name="qty" Mode="In" Type="Int32" />
-      <Parameter Name="message" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(String)">
+      <Parameter Name="username" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="AuthenticateRegister" ReturnType="Collection(String)">
       <Parameter Name="Username" Mode="In" Type="String" />
@@ -20,6 +22,7 @@
     <FunctionImport Name="DeleteProduct">
       <Parameter Name="ProductID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetColor" ReturnType="Collection(ShoeStoreModel.GetColor_Result)" />
     <FunctionImport Name="GetColorOfProduct" ReturnType="Collection(ShoeStoreModel.GetColorOfProduct_Result)">
       <Parameter Name="productId" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -36,8 +39,15 @@
       <Parameter Name="sizeId" Mode="In" Type="Int32" />
       <Parameter Name="ColorId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetSize" ReturnType="Collection(ShoeStoreModel.GetSize_Result)" />
     <FunctionImport Name="GetSizeOfProduct" ReturnType="Collection(ShoeStoreModel.GetSizeOfProduct_Result)">
       <Parameter Name="productId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserCart" ReturnType="Collection(ShoeStoreModel.GetUserCart_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InsertProduct">
       <Parameter Name="ProductName" Mode="In" Type="String" />
@@ -60,13 +70,12 @@
       <Parameter Name="ImgExt" Mode="In" Type="String" />
       <Parameter Name="productId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="AuthenticateLogin" ReturnType="Collection(String)">
-      <Parameter Name="username" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="getUserSession" ReturnType="Collection(ShoeStoreModel.getUserSession_Result)">
-      <Parameter Name="username" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="GetColor_Result">
+    <Property Type="Int32" Name="ColorId" Nullable="false" />
+    <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ColorHexCode" Nullable="true" MaxLength="10" />
+  </ComplexType>
   <ComplexType Name="GetColorOfProduct_Result">
     <Property Type="Int32" Name="ColorId" Nullable="false" />
     <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
@@ -77,7 +86,6 @@
     <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
     <Property Type="Double" Name="ProductPrice" Nullable="true" />
     <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-    <Property Type="Int32" Name="Quantity" Nullable="true" />
     <Property Type="Int32" Name="ProductCategory" Nullable="true" />
     <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
     <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
@@ -88,7 +96,6 @@
     <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
     <Property Type="Double" Name="ProductPrice" Nullable="true" />
     <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-    <Property Type="Int32" Name="Quantity" Nullable="true" />
     <Property Type="Int32" Name="ProductCategory" Nullable="true" />
     <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
     <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
@@ -97,19 +104,23 @@
     <Property Type="Binary" Name="ImageData" Nullable="true" />
     <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
   </ComplexType>
+  <ComplexType Name="GetSize_Result">
+    <Property Type="Int32" Name="SizeId" Nullable="false" />
+    <Property Type="Double" Name="SizeValue" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="GetSizeOfProduct_Result">
     <Property Type="Int32" Name="SizeId" Nullable="false" />
     <Property Type="Double" Name="SizeValue" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="SearchProduct_Result">
-    <Property Type="Int32" Name="ProductId" Nullable="false" />
+  <ComplexType Name="GetUserCart_Result">
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Int32" Name="PCS_Id" Nullable="false" />
+    <Property Type="Int32" Name="Available" Nullable="true" />
     <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
     <Property Type="Double" Name="ProductPrice" Nullable="true" />
-    <Property Type="Int32" Name="ProductViewer" Nullable="true" />
-    <Property Type="Int32" Name="Quantity" Nullable="true" />
-    <Property Type="Int32" Name="ProductCategory" Nullable="true" />
-    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
-    <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="SizeValue" Nullable="true" />
+    <Property Type="String" Name="ColorName" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="getUserSession_Result">
     <Property Type="String" Name="CustomerUsername" Nullable="false" MaxLength="100" />
@@ -118,5 +129,14 @@
     <Property Type="String" Name="CustomerPNum" Nullable="true" MaxLength="10" />
     <Property Type="String" Name="CustomerAddress" Nullable="true" MaxLength="200" />
     <Property Type="Binary" Name="CustomerImage" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SearchProduct_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="200" />
+    <Property Type="Double" Name="ProductPrice" Nullable="true" />
+    <Property Type="Int32" Name="ProductViewer" Nullable="true" />
+    <Property Type="Int32" Name="ProductCategory" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
   </ComplexType>
 </Schema>

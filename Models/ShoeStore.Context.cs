@@ -28,7 +28,7 @@ namespace ShoeStore.Models
         }
     
     
-        public virtual int addSizeColor(Nullable<int> productId, Nullable<int> sizeId, Nullable<int> colorId, Nullable<int> qty, ObjectParameter message)
+        public virtual int addSizeColor(Nullable<int> productId, Nullable<int> sizeId, Nullable<int> colorId, Nullable<int> qty)
         {
             var productIdParameter = productId.HasValue ?
                 new ObjectParameter("productId", productId) :
@@ -46,7 +46,16 @@ namespace ShoeStore.Models
                 new ObjectParameter("qty", qty) :
                 new ObjectParameter("qty", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addSizeColor", productIdParameter, sizeIdParameter, colorIdParameter, qtyParameter, message);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addSizeColor", productIdParameter, sizeIdParameter, colorIdParameter, qtyParameter);
+        }
+    
+        public virtual ObjectResult<string> AuthenticateLogin(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AuthenticateLogin", usernameParameter);
         }
     
         public virtual ObjectResult<string> AuthenticateRegister(string username, string password, string customerName, string email, string phoneNumber, string address, byte[] image)
@@ -89,6 +98,11 @@ namespace ShoeStore.Models
                 new ObjectParameter("ProductID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteProduct", productIDParameter);
+        }
+    
+        public virtual ObjectResult<GetColor_Result> GetColor()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetColor_Result>("GetColor");
         }
     
         public virtual ObjectResult<GetColorOfProduct_Result> GetColorOfProduct(Nullable<int> productId)
@@ -144,6 +158,11 @@ namespace ShoeStore.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantity", productIdParameter, sizeIdParameter, colorIdParameter);
         }
     
+        public virtual ObjectResult<GetSize_Result> GetSize()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSize_Result>("GetSize");
+        }
+    
         public virtual ObjectResult<GetSizeOfProduct_Result> GetSizeOfProduct(Nullable<int> productId)
         {
             var productIdParameter = productId.HasValue ?
@@ -151,6 +170,24 @@ namespace ShoeStore.Models
                 new ObjectParameter("productId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSizeOfProduct_Result>("GetSizeOfProduct", productIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserCart_Result> GetUserCart(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCart_Result>("GetUserCart", usernameParameter);
+        }
+    
+        public virtual ObjectResult<getUserSession_Result> getUserSession(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUserSession_Result>("getUserSession", usernameParameter);
         }
     
         public virtual int InsertProduct(string productName, Nullable<double> productPrice, Nullable<int> productCategory, string description)
@@ -223,33 +260,6 @@ namespace ShoeStore.Models
                 new ObjectParameter("productId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("UploadImageToProduct", imgDataParameter, imgExtParameter, productIdParameter);
-        }
-    
-        public virtual ObjectResult<string> AuthenticateLogin(string username)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AuthenticateLogin", usernameParameter);
-        }
-    
-        public virtual ObjectResult<getUserSession_Result> getUserSession(string username)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUserSession_Result>("getUserSession", usernameParameter);
-        }
-    
-        public virtual ObjectResult<GetUserCart_Result> GetUserCart(string username)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserCart_Result>("GetUserCart", usernameParameter);
         }
     }
 }

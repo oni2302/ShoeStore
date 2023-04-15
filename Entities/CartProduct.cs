@@ -22,6 +22,11 @@ namespace ShoeStore.Entities
             Price = price;
             Image = image;
         }
+
+        public CartProduct()
+        {
+        }
+
         public static bool operator ==(CartProduct first,CartProduct second)
         {
             if (first.ProductId == second.ProductId) return true;
@@ -32,5 +37,25 @@ namespace ShoeStore.Entities
             return first == second;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is CartProduct product &&
+                   Quantity == product.Quantity &&
+                   ProductId == product.ProductId &&
+                   ProductName == product.ProductName &&
+                   Price == product.Price &&
+                   EqualityComparer<byte[]>.Default.Equals(Image, product.Image);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 38517788;
+            hashCode = hashCode * -1521134295 + Quantity.GetHashCode();
+            hashCode = hashCode * -1521134295 + ProductId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ProductName);
+            hashCode = hashCode * -1521134295 + Price.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<byte[]>.Default.GetHashCode(Image);
+            return hashCode;
+        }
     }
 }

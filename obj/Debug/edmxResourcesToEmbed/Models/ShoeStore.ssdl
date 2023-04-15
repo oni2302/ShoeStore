@@ -5,7 +5,6 @@
     <Parameter Name="sizeId" Type="int" Mode="In" />
     <Parameter Name="colorId" Type="int" Mode="In" />
     <Parameter Name="qty" Type="int" Mode="In" />
-    <Parameter Name="message" Type="nvarchar" Mode="InOut" />
   </Function>
   <Function Name="AuthenticateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="username" Type="varchar" Mode="In" />
@@ -22,6 +21,7 @@
   <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProductID" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetColorOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="productId" Type="int" Mode="In" />
   </Function>
@@ -38,8 +38,12 @@
     <Parameter Name="sizeId" Type="int" Mode="In" />
     <Parameter Name="ColorId" Type="int" Mode="In" />
   </Function>
+  <Function Name="GetSize" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetSizeOfProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="productId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUserCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
   </Function>
   <Function Name="getUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="username" Type="varchar" Mode="In" />

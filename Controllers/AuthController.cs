@@ -28,9 +28,8 @@ namespace ShoeStore.Controllers
         [HttpPost]
         public ActionResult Login(string username,string password)
         {
-            var check = db.AuthenticateLogin(username).FirstOrDefault();
-            check = PasswordOption.Decrypt(check);
-            if (check ==password)
+            var hashPassword = db.AuthenticateLogin(username).FirstOrDefault();
+            if (PasswordOption.Validation(password,hashPassword))
             {
                 var userSession = db.getUserSession(username).First();
                 Session.Add(CommonConstants.USER_SESSION, userSession);

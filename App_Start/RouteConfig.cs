@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GiaoHang.Common;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,6 +14,53 @@ namespace ShoeStore
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            //Cái này Phúc tự thêm hết mấy cái bên dưới vào nha
+            //Mẫu:
+            //RouteItem.routesList.Add(new RouteItem("Tên route", "đường dẫn", "Controller", "Action"));
+            //
+            //Home Controller
+                
+            //ProductsController
+                
+            //...
+
+            //Ví dụ:
+            /*routes.MapRoute(
+              name: "trangchu",
+              url: "trangchu",
+              defaults: new
+              {
+                  action = "Home",
+                  controller = "Products"
+              }
+            );
+            ====> RouteItem.routesList.Add(new RouteItem("trangchu", "trangchu", "Products", "Home"));
+             */
+
+            //Mấy cái phần liên quan tới admin thì Phúc qua bên area Admin nha
+            //Areas/Admin/AdminAreaRegistration.cs
+
+
+
+
+
+            // Tự động thêm route bên trên 
+            foreach (var item in RouteItem.customerRoutes)
+            {
+                routes.MapRoute(
+                    name: item.Name,
+                    url: item.Url,
+                    defaults: new { controller = item.Controler, action = item.Action, id = UrlParameter.Optional }
+                );
+            }
+
+
+
+
+
+
+
 
             routes.MapRoute(
               name: "trangchu",

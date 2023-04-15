@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Manager";
-    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -15,39 +15,30 @@
                 <button class="btn btn-success" type="submit">Search</button>
             </form>*@
         </div>
-        <div class="form-horizontal" style="background-color: white; padding: 30px; border-rad ius: 1rem">
-
-            <p>
-                @Html.ActionLink("Thêm sản phẩm ", "ThemSanPham","Product", new {  @class = "btn btn-outline-success", @style = "border-radius: 1rem;  width: 150px;"  })
-
-            </p>
+        <a href="@Url.RouteUrl("ThemSP")" class="btn btn-success mb-3" style="border-radius: 1.5rem;  width: 20%;">Thêm sản phẩm</a>
+        <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
             <div class="">
-
                 <table class="table table-hover">
 
                     <tr>
                         <th>
-                            <label>ProductName</label>
+                            <label>Stt</label>
                         </th>
                         <th>
-                            <label>ProductPrice</label>
+                            <label>Tên</label>
                         </th>
                         <th>
-                            <label>Category</label>
+                            <label>Giá</label>
                         </th>
                         <th>
-                            <label>ProductViewer</label>
+                            <label>Loại</label>
                         </th>
                         <th>
-                            <label>Quantity</label>
+                            <label>Ngày</label>
                         </th>
                         <th>
-                            <label>Date</label>
+                            <label>Mô tả</label>
                         </th>
-                        <th>
-                            <label>Description</label>
-                        </th>
-                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -55,6 +46,9 @@
                     @foreach (var item in ViewBag.Products)
                     {
                         <tr>
+                            <td>
+                                @item.ProductId
+                            </td>
                             <td>
                                 @item.ProductName
                             </td>
@@ -65,12 +59,6 @@
                                 @item.CategoryName
                             </td>
                             <td>
-                                @item.ProductViewer
-                            </td>
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td>
                                 @item.Date
                             </td>
                             <td>
@@ -78,17 +66,10 @@
                             </td>
 
                             <td>
-                                @Html.ActionLink("Sửa", "SuaSanPham", new { id = item.ProductId }, new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
-                                
+                                @Html.ActionLink("Sửa", "SuaSanPham", new { id = item.ProductId }, new { @class = "btn btn-outline-success mx-auto w-100", @style = "border-radius: 1.5rem;  " })
                             </td>
                             <td>
-                                
-                                @Html.ActionLink("Thêm", "SuaSanPham", new { id = item.ProductId }, new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
-                                
-                            </td>
-                            <td>
-                                
-                                @Html.ActionLink("Xóa", "XoaSanPham", new { id = item.ProductId }, new { @class = "btn btn-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                                @Html.ActionLink("Thêm ảnh", "ThemImage", new { id = item.ProductId }, new { @class = "btn btn-success mx-auto w-100", @style = "border-radius: 1.5rem;  " })
                             </td>
                         </tr>
                     }
